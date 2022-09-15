@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 namespace RPG.Dialogue
 {
@@ -9,7 +11,7 @@ namespace RPG.Dialogue
     public class Dialogue : ScriptableObject
     {
         [SerializeField]
-        List<DialogueNode> nodes;
+        List<DialogueNode> nodes = new List<DialogueNode>();
 
         Dictionary<string, DialogueNode> nodeLookup = new Dictionary<string, DialogueNode>();
 
@@ -17,7 +19,9 @@ namespace RPG.Dialogue
         private void Awake() {
             if (nodes.Count == 0)
             {
-                nodes.Add(new DialogueNode());
+                DialogueNode rootNode = new DialogueNode();
+                rootNode.uniqueID = Guid.NewGuid().ToString();
+                nodes.Add(rootNode);
             }
         }
 #endif
@@ -27,6 +31,7 @@ namespace RPG.Dialogue
             {
                 nodeLookup[node.uniqueID] = node;
             }
+
         }
 
         public IEnumerable<DialogueNode> GetAllNodes()
@@ -47,6 +52,30 @@ namespace RPG.Dialogue
                 {
                     yield return nodeLookup[childID];
                 }
+            }
+        }
+
+        public void CreateNode(DialogueNode parent)
+        {
+            DialogueNode newNode = new DialogueNode();
+            newNode.uniqueID = Guid.NewGuid().ToString();
+            parent.children.Add(newNode.uniqueID);
+            nodes.Add(newNode);
+            OnValidate();
+        }
+
+        public void DeleteNode(DialogueNode nodeToDelete)
+        {
+            nodes.Remove(nodeToDelete);
+            OnValidate();
+            DeleteDanglingChildren(nodeToDelete);
+        }
+
+        private void DeleteDanglingChildren(DialogueNode nodeToDelete)
+        {
+            foreach (DialogueNode node in GetAllNodes())
+            {
+                node.children.Remove(nodeToDelete.uniqueID);
             }
         }
     }
