@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
                        Input.GetAxisRaw("Vertical"));   
     }
 
-    private void HandleMovement(float moveHorizontal, float moveVertical)
-    {
-        rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
-    }
+    private void HandleMovement(float moveHorizontal, float moveVertical) => rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
+    
 }
