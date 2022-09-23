@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     Vector3 offset; 
     private void Start() {
-        if(!target)
+        if(target == null)
         {
             target = GameObject.FindWithTag("Player");
         }
@@ -17,6 +17,18 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        FollowPlayer();
+    }
+
+    void FollowPlayer() {
         transform.position = target.transform.position + offset;      
+    }
+
+    void LookAhead(float amount) {
+        
+    }
+
+    void DeadZone(float x, float y) {
+        
     }
 }
