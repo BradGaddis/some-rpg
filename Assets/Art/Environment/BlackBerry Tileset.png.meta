@@ -3,7 +3,7 @@ guid: 8f9cb0203cd839e4c8ac811921081ee0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -43,13 +43,13 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 4
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -63,11 +63,12 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -1994,8 +1995,8 @@ TextureImporter:
       BlackBerry Tileset_20: 70634707
       BlackBerry Tileset_85: -434955429
       BlackBerry Tileset_9: -2142873840
-      BlackBerry Tileset_42: 1416718916
       BlackBerry Tileset_51: -342463512
+      BlackBerry Tileset_42: 1416718916
       BlackBerry Tileset_81: -1994831798
       BlackBerry Tileset_13: -101787993
       BlackBerry Tileset_75: -503679366

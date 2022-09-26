@@ -1,17 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Personality", menuName = "Characters/Personality", order = 0)]
 public class Personality : ScriptableObject {
     // a series of values that any character can have
 
     [Header("Courage Value")]
-    [SealializeField]
+    [SerializeField]
     int courageValue = 0;
     [Header("Friendliness Value")]
-    [SealializeField]
+    [SerializeField]
     int amicabilityValue = 0;
 
     [SerializeField]

@@ -1,0 +1,238 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tilesets_Master
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: f6ad0c5e97ea6d04fbdfe8ceec7ee52e, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -945620579, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1446148385, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 2074042927, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -849071439, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1768427596, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1409411902, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1566717724, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -592267166, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 485519742, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 177261310, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1800305535, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1041615395, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1850688642, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -471630746, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -465732499, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 566508139, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 969558481, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -101787993, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -517458673, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1465577796, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -2018786905, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -2068262898, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1034867518, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1144247079, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -15427237, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1414645390, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -2142873840, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1858772291, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 412568870, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -342463512, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 192170908, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 861862500, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -409647928, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -969099697, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1771491196, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -730346005, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1416718916, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 719775255, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1352599711, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 419009180, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -36873585, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 487615018, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1058463344, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -411260690, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1316387382, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -394639284, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1844012591, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -981854389, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -44526745, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 2002590726, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 931263475, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 444709675, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 2040284609, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -560030815, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1564017481, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1409631916, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 387595150, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1744183086, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -2044239261, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -2116085043, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 3828100, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -503679366, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 103470984, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -88714171, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -434955429, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -168712763, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 2032388260, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 70634707, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1408079953, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1519350750, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 398934511, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1791408423, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1513709669, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1165174877, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1378832119, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -744593804, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 646505143, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1444793789, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1780785774, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1994831798, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -198653711, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1766115756, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1056140979, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -640108396, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 1498766486, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: -1376844275, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 25361876, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 942180938, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
+  - {fileID: 21300000, guid: 366d8425f5b1f1f4ba4f1efd4d48075f, type: 3}
+  - {fileID: 21300000, guid: 633fcc9adb8c9114eafd1b7f538fad15, type: 3}
+  - {fileID: 21300000, guid: 2381c2cd316ba3c4f9e93fe5d8b6c457, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - BlackBerry Tileset_18
+  - BlackBerry Tileset_61
+  - BlackBerry Tileset_19
+  - BlackBerry Tileset_60
+  - BlackBerry Tileset_63
+  - BlackBerry Tileset_62
+  - BlackBerry Tileset_14
+  - BlackBerry Tileset_65
+  - BlackBerry Tileset_15
+  - BlackBerry Tileset_64
+  - BlackBerry Tileset_16
+  - BlackBerry Tileset_67
+  - BlackBerry Tileset_17
+  - BlackBerry Tileset_66
+  - BlackBerry Tileset_10
+  - BlackBerry Tileset_11
+  - BlackBerry Tileset_12
+  - BlackBerry Tileset_13
+  - BlackBerry Tileset_5
+  - BlackBerry Tileset_4
+  - BlackBerry Tileset_7
+  - BlackBerry Tileset_6
+  - BlackBerry Tileset_1
+  - BlackBerry Tileset_0
+  - BlackBerry Tileset_3
+  - BlackBerry Tileset_2
+  - BlackBerry Tileset_9
+  - BlackBerry Tileset_8
+  - BlackBerry Tileset_50
+  - BlackBerry Tileset_51
+  - BlackBerry Tileset_52
+  - BlackBerry Tileset_32
+  - BlackBerry Tileset_53
+  - BlackBerry Tileset_43
+  - BlackBerry Tileset_33
+  - BlackBerry Tileset_54
+  - BlackBerry Tileset_42
+  - BlackBerry Tileset_30
+  - BlackBerry Tileset_55
+  - BlackBerry Tileset_41
+  - BlackBerry Tileset_31
+  - BlackBerry Tileset_25
+  - BlackBerry Tileset_56
+  - BlackBerry Tileset_40
+  - BlackBerry Tileset_76
+  - BlackBerry Tileset_36
+  - BlackBerry Tileset_24
+  - BlackBerry Tileset_57
+  - BlackBerry Tileset_47
+  - BlackBerry Tileset_77
+  - BlackBerry Tileset_37
+  - BlackBerry Tileset_27
+  - BlackBerry Tileset_87
+  - BlackBerry Tileset_58
+  - BlackBerry Tileset_46
+  - BlackBerry Tileset_74
+  - BlackBerry Tileset_34
+  - BlackBerry Tileset_26
+  - BlackBerry Tileset_86
+  - BlackBerry Tileset_59
+  - BlackBerry Tileset_45
+  - BlackBerry Tileset_75
+  - BlackBerry Tileset_35
+  - BlackBerry Tileset_21
+  - BlackBerry Tileset_85
+  - BlackBerry Tileset_44
+  - BlackBerry Tileset_72
+  - BlackBerry Tileset_20
+  - BlackBerry Tileset_84
+  - BlackBerry Tileset_73
+  - BlackBerry Tileset_23
+  - BlackBerry Tileset_83
+  - BlackBerry Tileset_70
+  - BlackBerry Tileset_38
+  - BlackBerry Tileset_22
+  - BlackBerry Tileset_82
+  - BlackBerry Tileset_49
+  - BlackBerry Tileset_71
+  - BlackBerry Tileset_39
+  - BlackBerry Tileset_81
+  - BlackBerry Tileset_48
+  - BlackBerry Tileset_80
+  - BlackBerry Tileset_29
+  - BlackBerry Tileset_28
+  - BlackBerry Tileset_78
+  - BlackBerry Tileset_79
+  - BlackBerry Tileset_69
+  - BlackBerry Tileset_68
+  - slime
+  - player shadow
+  - player
+  m_RenderDataMap: {}
+  m_Tag: Tilesets_Master
+  m_IsVariant: 0
