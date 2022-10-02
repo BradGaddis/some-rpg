@@ -7,7 +7,6 @@ public class BuddyFollow : MonoBehaviour
 {
     [SerializeField]
     GameObject targetToFollow;
-    SpriteRenderer spriteRenderer;
     Rigidbody2D targetRB;
     
     [SerializeField]
@@ -23,7 +22,6 @@ public class BuddyFollow : MonoBehaviour
     private void Start() {
         targetRB = targetToFollow.GetComponent<Rigidbody2D>();
         newOffset = offset;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
@@ -42,7 +40,6 @@ public class BuddyFollow : MonoBehaviour
             Vector2 newPos = new Vector3((targetToFollow.transform.position.x + padRadius * xDir), targetToFollow.transform.position.y);
             Debug.Log(newPos);
             transform.position = Vector2.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);            
-            // Vector2.SmoothDamp(transform.position, newPos, ref currenVelocity, 2f, 1f);
         } else { 
             xDir = Mathf.Sign(targetVelocity)  * -1;
             newOffset *= xDir; 

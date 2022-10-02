@@ -2209,6 +2209,7 @@ MonoBehaviour:
   targetToFollow: {fileID: 1664672411}
   padRadius: 2
   offset: 5
+  moveSpeed: 2
 --- !u!1 &1085410576
 GameObject:
   m_ObjectHideFlags: 0
