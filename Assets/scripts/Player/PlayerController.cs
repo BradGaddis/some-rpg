@@ -21,8 +21,25 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement(Input.GetAxisRaw("Horizontal"), 
                        Input.GetAxisRaw("Vertical"));   
+
+        if (Input.GetKeyDown (KeyCode.Space)) {
+            StartCoroutine (Jump());
+        }   
     }
 
     private void HandleMovement(float moveHorizontal, float moveVertical) => rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
     
+    IEnumerator Jump() {
+        Vector2 curscale = transform.localScale;
+        float scaleChange = curscale.x + 0.5f;
+        transform.localScale = new Vector2(scaleChange, scaleChange);
+        // animate the jump
+        return null;
+    }
+
+    public void AddPowerUp(PowerUp powerUp) {
+        // add power up to player
+        Debug.Log("Power Up Collected: " + powerUp.name);
+    }
+
 }

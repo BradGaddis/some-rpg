@@ -40,7 +40,6 @@ public class BuddyFollow : MonoBehaviour
         if(targetVelocity == 0)
         {
             Vector2 newPos = new Vector3((targetToFollow.transform.position.x + padRadius * xDir), targetToFollow.transform.position.y);
-            Debug.Log(newPos);
             transform.position = Vector2.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);            
             // Vector2.SmoothDamp(transform.position, newPos, ref currenVelocity, 2f, 1f);
         } else { 
