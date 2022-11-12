@@ -5,15 +5,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
+    // [SerializeField]
     float runSpeed;
+    // stats stribable object
+    [SerializeField]
+    Stats stats;
+    
+    // stats
+    int health;
+    int damage;
+    int speed;
+    float jumpForce;
 
     Rigidbody2D rb;
-
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        // get stats
+        runSpeed = stats.GetSpeed();
+        health = stats.GetHealth();
+        damage = stats.GetDamage();
+        jumpForce = stats.GetJumpForce(); // this it the scale the player will be scaled to when "jumping"
     }
 
     // Update is called once per frame
@@ -41,5 +54,4 @@ public class PlayerController : MonoBehaviour
         // add power up to player
         Debug.Log("Power Up Collected: " + powerUp.name);
     }
-
 }

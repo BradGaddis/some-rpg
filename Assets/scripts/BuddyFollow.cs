@@ -33,7 +33,6 @@ public class BuddyFollow : MonoBehaviour
 
     void FollowTarget()
     {
-        // transform.position = target.transform.position + offset;
         newOffset = offset;
         float targetVelocity = targetRB.velocity.x;
 
@@ -41,7 +40,6 @@ public class BuddyFollow : MonoBehaviour
         {
             Vector2 newPos = new Vector3((targetToFollow.transform.position.x + padRadius * xDir), targetToFollow.transform.position.y);
             transform.position = Vector2.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);            
-            // Vector2.SmoothDamp(transform.position, newPos, ref currenVelocity, 2f, 1f);
         } else { 
             xDir = Mathf.Sign(targetVelocity)  * -1;
             newOffset *= xDir; 
@@ -55,7 +53,6 @@ public class BuddyFollow : MonoBehaviour
         { 
             transform.localScale = new Vector2(xDir, transform.localScale.y);
         }
-
     }
 
 }
