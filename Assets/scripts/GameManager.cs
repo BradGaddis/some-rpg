@@ -17,3 +17,12 @@ public class GameManager : MonoBehaviour
         
     }
 }
+
+// game state
+public enum GameState
+{
+    MainMenu,
+    InGame,
+    Paused,
+    GameOver
+}

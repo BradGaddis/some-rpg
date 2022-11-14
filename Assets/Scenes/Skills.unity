@@ -2322,7 +2322,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1664672413}
-  - component: {fileID: 1664672416}
   - component: {fileID: 1664672415}
   - component: {fileID: 1664672417}
   - component: {fileID: 1664672418}
@@ -2371,19 +2370,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1664672416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664672411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bbc809bc229b0d4f91f5c7edd96a51e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
 --- !u!61 &1664672417
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2423,6 +2409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
+  jumpForce: 0
+  jumpSize: 1
 --- !u!1 &1686561539
 GameObject:
   m_ObjectHideFlags: 0

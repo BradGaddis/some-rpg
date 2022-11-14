@@ -1,5 +1,4 @@
 // Player state machine
-
 public enum PlayerState
 {
     Idle,
@@ -26,4 +25,12 @@ public class PlayerStateMachine
     }
 
     public PlayerState state { get; set; }
+
+    public void ChangeState(PlayerState newState)
+    {
+        if (state != newState)
+        {
+            state = newState;
+        }
+    }
 }

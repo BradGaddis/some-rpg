@@ -15,14 +15,17 @@ public class PlayerController : MonoBehaviour
     int health;
     int damage;
     int speed;
+    [SerializeField]
     float jumpForce;
+    [SerializeField]
+    [Header("The Player Size Mid-Jump")]
+    float jumpSize;
 
     Tool hammer = new Tool();
 
-    // player state
-    PlayerState currentState = PlayerState.Idle;
+    
     // Player State Machine
-    PlayerStateMachine playerStateMachine = new PlayerStateMachine(PlayerState.Idle);
+    PlayerStateMachine currentState = new PlayerStateMachine(PlayerState.Idle);
 
     Rigidbody2D rb;
     // Start is called before the first frame update
@@ -39,7 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentState != PlayerState.Interacting)
+        if (currentState.state != PlayerState.Interacting)
         {
             HandleMovement(Input.GetAxisRaw("Horizontal"), 
                         Input.GetAxisRaw("Vertical"));   
@@ -49,28 +52,54 @@ public class PlayerController : MonoBehaviour
             HandleMovement(0, 0);
         }
 
-        if (Input.GetKeyDown (KeyCode.Space) && currentState != PlayerState.Jumping) {
+        // only call once per frame
+        if (Input.GetKeyDown (KeyCode.Space) && currentState.state != PlayerState.Jumping) {
             StartCoroutine (Jump());
         }   
 
         HandleActions();
     }
 
-    private void HandleMovement(float moveHorizontal, float moveVertical) => rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
+    // private void HandleMovement(float moveHorizontal, float moveVertical) => rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
+    // movement
+    private void HandleMovement(float moveHorizontal, float moveVertical)
+    {
+        if (moveHorizontal != 0 || moveVertical != 0)
+        {
+            currentState.ChangeState(PlayerState.Running);
+        }
+        else
+        {
+            currentState.ChangeState(PlayerState.Idle);
+        }
+        // lock diagonal movement
+        if (moveHorizontal != 0 && moveVertical != 0)
+        {
+            moveHorizontal = 0;
+        }
+        rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
+    }
     
     //  TODO fix double call
     IEnumerator Jump() {
-        // hold state
-        PlayerState prevState = currentState;
-        currentState = PlayerState.Jumping;
+        PlayerState prevState = currentState.state;
+        currentState.ChangeState(PlayerState.Jumping);
+        SpriteRenderer playerSprite = GetComponentInChildren<SpriteRenderer>();
+        float playerSpriteY = playerSprite.transform.position.y;
+        
         Vector2 curscale = transform.localScale;
-        float scaleChange = curscale.x + 0.5f;
+        float scaleChange = curscale.x + jumpSize;
         transform.localScale = new Vector2(scaleChange, scaleChange);
-        yield return new WaitForSeconds(1f);
-        transform.localScale = new Vector3(1,1,1);
-        currentState = prevState;
-    }
+        playerSprite.transform.position = new Vector2(playerSprite.transform.position.x, playerSprite.transform.position.y + jumpForce);
 
+        yield return new WaitForSeconds(jumpForce);
+        playerSprite.transform.position = new Vector2(playerSprite.transform.position.x, playerSpriteY);
+        transform.localScale = curscale;
+        currentState.ChangeState(prevState);
+
+        // find Player Sprite in children
+    }
+    
     public void AddPowerUp(PowerUp powerUp) {
         // add power up to player
         Debug.Log("Power Up Collected: " + powerUp.name);
@@ -79,17 +108,16 @@ public class PlayerController : MonoBehaviour
     // switch tool
     IEnumerator UseTool(Tool tool = null) {
         // hold state
-        PlayerState prevState = currentState;
-        currentState = PlayerState.Interacting;
+        PlayerState prevState = currentState.state;
+        currentState.ChangeState(PlayerState.Interacting);
         Debug.Log("Using tool: " + tool.name);
         yield return new WaitForSeconds(1f);
-        currentState = prevState;
+        currentState.ChangeState(prevState);
     }
 
     // action handler
     public void HandleActions() {
-        // lock movement
-        if (Input.GetKeyDown (KeyCode.E) && currentState != PlayerState.Jumping) {
+        if (Input.GetKeyDown (KeyCode.E) && currentState.state != PlayerState.Jumping) {
             StartCoroutine (UseTool(hammer));
         }
     }
