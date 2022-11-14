@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 1
   damage: 1
   speed: 5
-  jumpForce: 1
+  jumpForce: 0.5

@@ -84,16 +84,23 @@ public class PlayerController : MonoBehaviour
     IEnumerator Jump() {
         PlayerState prevState = currentState.state;
         currentState.ChangeState(PlayerState.Jumping);
-        SpriteRenderer playerSprite = GetComponentInChildren<SpriteRenderer>();
-        float playerSpriteY = playerSprite.transform.position.y;
+
         
         Vector2 curscale = transform.localScale;
         float scaleChange = curscale.x + jumpSize;
+        SpriteRenderer playerSprite = GetComponentInChildren<SpriteRenderer>();
+        
         transform.localScale = new Vector2(scaleChange, scaleChange);
         playerSprite.transform.position = new Vector2(playerSprite.transform.position.x, playerSprite.transform.position.y + jumpForce);
 
         yield return new WaitForSeconds(jumpForce);
-        playerSprite.transform.position = new Vector2(playerSprite.transform.position.x, playerSpriteY);
+
+        GameObject shadow = GameObject.Find("Player Shadow");
+
+        // get shadow position
+        Vector3 shadowPosCenter = shadow.GetComponent<BoxCollider2D>().bounds.center;
+
+        playerSprite.transform.position = new Vector2(shadowPosCenter.x, shadowPosCenter.y + playerSprite.bounds.extents.y);
         transform.localScale = curscale;
         currentState.ChangeState(prevState);
 
