@@ -7,7 +7,6 @@ public class BuddyFollow : MonoBehaviour
 {
     [SerializeField]
     GameObject targetToFollow;
-    SpriteRenderer spriteRenderer;
     Rigidbody2D targetRB;
     
     [SerializeField]
@@ -23,7 +22,6 @@ public class BuddyFollow : MonoBehaviour
     private void Start() {
         targetRB = targetToFollow.GetComponent<Rigidbody2D>();
         newOffset = offset;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
