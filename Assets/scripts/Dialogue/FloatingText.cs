@@ -14,7 +14,7 @@ public class FloatingText {
 
     public Color color;
     public float size;
-    public float rotation;
+    public float rotation; 
     public float rotationSpeed;
     public bool destroyOnFinish;
     public bool useWorldSpace;
