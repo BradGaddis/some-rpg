@@ -6,51 +6,105 @@ using UnityEngine;
 public class BuddyFollow : MonoBehaviour
 {
     [SerializeField]
-    GameObject targetToFollow;
-    Rigidbody2D targetRB;
+    GameObject wayPoint;
+    Vector3 playerPos;
+    [SerializeField]
+    float innerRadius;
+    [SerializeField]
+    float followRadius;
     
     [SerializeField]
-    float padRadius;
+    bool followPlayer;
+
     [SerializeField]
-    float offset;
-    float newOffset;
-    float xDir = -1f;
-    Vector2 currenVelocity;
-    [SerializeField]
-    float moveSpeed;
+    float speed = 1f;
 
-    private void Start() {
-        targetRB = targetToFollow.GetComponent<Rigidbody2D>();
-        newOffset = offset;
-    }
-
-    private void Update() {
-        FollowTarget();
-        FlipSprite();
-    }
-
-    void FollowTarget()
+    // Start is called before the first frame update
+    void Start()
     {
-        newOffset = offset;
-        float targetVelocity = targetRB.velocity.x;
-
-        if(targetVelocity == 0)
+        if (wayPoint == null)
         {
-            Vector2 newPos = new Vector3((targetToFollow.transform.position.x + padRadius * xDir), targetToFollow.transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);            
-        } else { 
-            xDir = Mathf.Sign(targetVelocity)  * -1;
-            newOffset *= xDir; 
-            Vector2 newPos = new Vector2(targetToFollow.transform.position.x + newOffset, targetToFollow.transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, newPos, Time.deltaTime * moveSpeed);
+            wayPoint = GameObject.Find("wayPoint"); // This can be used later for path finding
+        } else if (wayPoint.tag == "Player"){
+            followPlayer = true;
         }
     }
 
-    void FlipSprite() {
-        if(xDir != 0)
-        { 
-            transform.localScale = new Vector2(xDir, transform.localScale.y);
+void  OnDrawGizmos()
+{
+    Gizmos.color = Color.green;
+    Gizmos.DrawWireSphere(transform.position, innerRadius);
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(transform.position, followRadius);
+}
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        playerPos = wayPoint.transform.position;
+        if (followPlayer) {
+            FollowPlayer();
+        } 
+        else {
+            // Follow waypoint
+            if (Vector3.Distance(transform.position, playerPos) > innerRadius)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+            }
         }
     }
 
+    private void FollowPlayer()
+    {
+        // Check if Buddy is outside of follow radius
+        if (Vector2.Distance(transform.position, wayPoint.transform.position) > innerRadius)
+        {
+            Vector2 wayPointVel = wayPoint.GetComponent<Rigidbody2D>().velocity;
+            if (wayPointVel != Vector2.zero)
+            {
+                float xDir = Mathf.Sign(wayPointVel.x) * -1f;
+                float yDir = Mathf.Sign(wayPointVel.y) * -1f;
+                
+                // check if position is within idle radius
+                if (Vector2.Distance(transform.position, wayPoint.transform.position) <= innerRadius){
+                    ProcessIdle(xDir, yDir);
+                    return; 
+                }
+                
+                // Budddy is inside follow radius, should not be moving, but panicking
+                if (Vector2.Distance(transform.position, wayPoint.transform.position) < followRadius)
+                {
+                    // transform.position = Vector2.MoveTowards(transform.position, wayPoint.transform.position + new Vector3(xDir * followRadius, yDir * followRadius), speed * Time.deltaTime);
+                    ProcessPlayerLeaving(xDir, yDir);
+                    return;
+                }
+                else
+                // Move towards the outer bouns of the follow raidus of player
+                {
+                    Vector2 direction = transform.position - playerPos;
+                    float distance = Vector2.Distance(transform.position, playerPos);
+                    direction = direction.normalized;
+                    transform.position = new Vector3(playerPos.x + direction.x * followRadius, playerPos.y + direction.y * followRadius);
+
+                }
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+            }
+        }
+    }
+
+    private void ProcessPlayerLeaving(float xDir, float yDir)
+    {
+        Debug.Log("HELP, HE'S LEAVING ME!!");
+        return; 
+    }
+
+    private void ProcessIdle(float xDir, float yDir)
+    {
+        Debug.Log("I'm idle");
+        return;
+    }
 }
