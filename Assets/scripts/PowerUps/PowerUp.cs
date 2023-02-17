@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using RPG;
 
 public class PowerUp : MonoBehaviour
 {

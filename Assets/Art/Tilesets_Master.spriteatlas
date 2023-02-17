@@ -139,7 +139,9 @@ SpriteAtlas:
   - {fileID: 25361876, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
   - {fileID: 942180938, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
   - {fileID: 21300000, guid: 35679bf05c030274ab7d5377dd9b57f0, type: 3}
+  - {fileID: 21300000, guid: ab61ced46c2cd7541867054988b70fa2, type: 3}
   - {fileID: 21300000, guid: 366d8425f5b1f1f4ba4f1efd4d48075f, type: 3}
+  - {fileID: 21300000, guid: 24beeda84ba30df45949dd0394a809b5, type: 3}
   - {fileID: 21300000, guid: 633fcc9adb8c9114eafd1b7f538fad15, type: 3}
   - {fileID: 21300000, guid: 2381c2cd316ba3c4f9e93fe5d8b6c457, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -232,7 +234,9 @@ SpriteAtlas:
   - BlackBerry Tileset_69
   - BlackBerry Tileset_68
   - frog
+  - basic_enemy_slime
   - slime
+  - apollo-1x
   - player shadow
   - player
   m_RenderDataMap: {}

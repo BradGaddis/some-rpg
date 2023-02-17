@@ -28,6 +28,11 @@ namespace RPG.Dialogue.Editor
         [NonSerialized]
         Vector2 draggingCanvasOffset;
 
+        float width = 4000;
+        float height = 4000;
+
+        const float backgroundSize = 50;
+
         [MenuItem("Window/Dialogue Editor")]
         public static void ShowEditorWindow()
         {
@@ -65,8 +70,6 @@ namespace RPG.Dialogue.Editor
                 Repaint();
             }
         }
-        float width = 2000;
-        float height = 1000;
 
         private void OnGUI() {
             
@@ -79,8 +82,10 @@ namespace RPG.Dialogue.Editor
                 ProcessEvents();
 
                 scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
-                GUILayoutUtility.GetRect(width,height);
-
+                Rect canvas = GUILayoutUtility.GetRect(width,height);
+                Texture2D backgroundTex = Resources.Load("background") as Texture2D;
+                Rect textCoords = new Rect(0, 0, width / backgroundSize, height / backgroundSize);
+                GUI.DrawTextureWithTexCoords(canvas, backgroundTex, textCoords);
                 foreach (DialogueNode node in selectedDialogue.GetAllNodes())
                 {
                     DrawConnections(node);
@@ -100,7 +105,6 @@ namespace RPG.Dialogue.Editor
                 {
                     DrawNode(node);
                 }
-
                 EditorGUILayout.EndScrollView();
 
                 if (creatingNode != null){
@@ -124,10 +128,12 @@ namespace RPG.Dialogue.Editor
                 if (draggingNode != null)
                 {
                     draggingOffset = draggingNode.rect.position - Event.current.mousePosition;
+                    Selection.activeObject = draggingNode;
                 }
                 else {
                     draggingCanvas = true;
                     draggingOffset = Event.current.mousePosition - scrollPosition;
+                    Selection.activeObject = selectedDialogue;
                 }
             }
             else if (Event.current.type == EventType.MouseDrag && draggingNode != null)
@@ -184,12 +190,12 @@ namespace RPG.Dialogue.Editor
                     linkingParentNode = null;
                 }
             } 
-            else if (linkingParentNode.children.Contains(node.uniqueID)){
+            else if (linkingParentNode.children.Contains(node.name)){
                 // unlink button 
                 if(GUILayout.Button("Unlink"))
                 {
                     Undo.RecordObject(selectedDialogue, "Remove Dialogue Link");
-                    linkingParentNode.children.Remove(node.uniqueID);
+                    linkingParentNode.children.Remove(node.name);
                     linkingParentNode = null;
                 }
             }
@@ -197,7 +203,7 @@ namespace RPG.Dialogue.Editor
                 if(GUILayout.Button("Child"))
                 {
                     Undo.RecordObject(selectedDialogue, "Add Dialogue Link");
-                    linkingParentNode.children.Add(node.uniqueID);
+                    linkingParentNode.children.Add(node.name);
                     linkingParentNode = null;
                 }
             }

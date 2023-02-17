@@ -1,72 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Dialogue;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+namespace RPG
 {
-    public static GameManager instance = null;
-
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (instance == null)
+        public static GameManager instance = null;
+
+        void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(gameObject);
         }
-        else if (instance != this)
+
+        public GameObject textContainer;
+        public GameObject textPrefab;
+        List<FloatingText> floatingTexts = new List<FloatingText>();
+
+        [SerializeField]
+        float speed;
+
+        FloatingText GetFloatingText()
         {
-            Destroy(gameObject);
+            FloatingText text = floatingTexts.Find(t => !t.active);
+
+            if (text == null)
+            {
+                text = new FloatingText();
+                text.gObj = Instantiate(textPrefab);
+                text.gObj.transform.SetParent(textContainer.transform);
+                text.text = text.gObj.GetComponent<Text>();
+
+                floatingTexts.Add(text);
+            }
+            return text;    
         }
-        DontDestroyOnLoad(gameObject);
+        
+        public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration){
+            FloatingText fText = GetFloatingText();
+            fText.text.text = msg;
+            fText.text.fontSize = fontSize;
+            fText.text.color = color;
+            fText.gObj.transform.position = Camera.main.WorldToScreenPoint(position);
+            fText.position = motion;
+            fText.duration = duration;        
+            fText.Show();
+        }
+
+        void Update()
+        {
+            foreach (FloatingText fText in floatingTexts)
+            {
+                fText.UpdateFloatingText(speed);
+            }
+        }
     }
-
-    public GameObject textContainer;
-    public GameObject textPrefab;
-    List<FloatingText> floatingTexts = new List<FloatingText>();
-
-    [SerializeField]
-    float speed;
-
-    FloatingText GetFloatingText()
+    // game state
+    public enum GameState
     {
-        FloatingText text = floatingTexts.Find(t => !t.active);
-
-        if (text == null)
-        {
-            text = new FloatingText();
-            text.gObj = Instantiate(textPrefab);
-            text.gObj.transform.SetParent(textContainer.transform);
-            text.text = text.gObj.GetComponent<Text>();
-
-            floatingTexts.Add(text);
-        }
-        return text;    
+        MainMenu,
+        InGame,
+        Paused,
+        GameOver
     }
-    
-    public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration){
-        FloatingText fText = GetFloatingText();
-        fText.text.text = msg;
-        fText.text.fontSize = fontSize;
-        fText.text.color = color;
-        fText.gObj.transform.position = Camera.main.WorldToScreenPoint(position);
-        fText.position = motion;
-        fText.duration = duration;        
-        fText.Show();
-    }
-
-    void Update()
-    {
-        foreach (FloatingText fText in floatingTexts)
-        {
-            fText.UpdateFloatingText(speed);
-        }
-    }
-}
-// game state
-public enum GameState
-{
-    MainMenu,
-    InGame,
-    Paused,
-    GameOver
 }
