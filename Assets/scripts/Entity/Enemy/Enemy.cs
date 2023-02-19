@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class Enemy: MonoBehaviour
     [SerializeField]
     protected float attackRange = 1f;
     // Enemy Attack Speed
+    private float attackTimer = 0f;
     [SerializeField]
     protected float attackSpeed = 1f;
     [SerializeField]
@@ -32,12 +34,9 @@ public class Enemy: MonoBehaviour
     protected List<GameObject> targets = new List<GameObject>();
 
     [SerializeField]
-    protected bool isDead = false;
+    protected bool isBoss = false; // TODO Bosses
 
-    [SerializeField]
-    protected bool isBoss = false;
-
-    [Header("Enemy Attributes")]
+    [Header("Basic Enemy Attributes")]
     // Toggle enemy attributes
     [SerializeField]
     protected bool chasesTarget = false;
@@ -48,13 +47,13 @@ public class Enemy: MonoBehaviour
     protected bool takesDamage = false;
     
 
-    private void Awake() {
+    virtual protected void Awake() {
         // set health
         health = health * healthModifier;
     }
 
 
-    private void Start() {
+    virtual protected void Start() {
         // resize circle collider to chase radius
         GetComponent<CircleCollider2D>().radius = chaseRadius;
     }
@@ -65,54 +64,79 @@ public class Enemy: MonoBehaviour
                 ChasePlayer(attackRange, chaseRadius, currentTarget);
             }
         }
-    }
-
-    // enemy type specific chase
-    protected void ChasePlayer(float attackRadius, float chaseRadius, GameObject target) {
-    float distanceToTarget = GetDistanceToTarget(target.transform);
-    if (distanceToTarget <= chaseRadius) {
-        if (distanceToTarget <= attackRadius) {
-            AttackTarget();
-            // Debug.Log("Attacking Player");
-            } else {
-                // move towards the player's position
-                Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        if (takesDamage) {
+            if (health <= 0) {
+                Die();
             }
         }
     }
 
-    protected virtual void AttackTarget() {
-        StartCoroutine(Attack());
+    // enemy type specific chase
+    virtual protected void ChasePlayer(float attackRadius, float chaseRadius, GameObject target) {
+    float distanceToTarget = GetDistanceToTarget(target.transform);
+    if (distanceToTarget <= chaseRadius) {
+        if (distanceToTarget <= attackRadius) {
+            // If in range, stop moving, commence sequence flags
+            switch (attacksTarget) {
+                case true:
+                    AttackTarget(target);
+                    break;
+                default:
+                    Idle();
+                    break;
+            }    
+        } else {
+            // move towards the player's position
+            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        }
+        }
     }
 
-    protected virtual IEnumerator Attack() {
-        // wait for attack speed
-        yield return new WaitForSeconds(attackSpeed);
-        // deal damage to player
-        DealDamage(damage);
+    private void Idle()
+    {
     }
 
-    protected void DealDamage(float amount) {
+    virtual protected void AttackTarget(GameObject target) {
+        // if attack timer is 0, attack
+        if (attackTimer <= 0) {
+            // attack
+            Debug.Log("Attacking " + target.name);
+            // reset attack timer
+            attackTimer = attackSpeed;
+        } else {
+            // decrement attack timer
+            attackTimer -= Time.deltaTime;
+        }
+    }
+
+    virtual protected void DealDamage(float amount) {
+        // deal damage to target
+        currentTarget.GetComponent<Health>().TakeDamage(damage);
+        Debug.Log("Dealt " + damage + " damage to " + currentTarget.name);
     }
 
     // Take Damage
-    protected void TakeDamage(int damage) {
+    virtual protected void TakeDamage(int damage) {
         health -= damage;
     }
     
+    virtual protected void Die() {
+        // Destroy enemy
+        Destroy(gameObject);
+    }
+
+
     // get distance to player
-    float GetDistanceToTarget(Transform target) {
+    virtual protected float GetDistanceToTarget(Transform target) {
         return Vector2.Distance(transform.position, target.transform.position);
     }
 
-    private void OnDrawGizmos() {
-
+    virtual protected void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-        
     }
 }

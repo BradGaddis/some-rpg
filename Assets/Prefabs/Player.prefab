@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 894720548169736774}
   - component: {fileID: 894720548169736824}
   - component: {fileID: 894720548169736827}
+  - component: {fileID: 6364514877889284715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -98,6 +99,18 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
   jumpForce: 0
   jumpSize: 1
+--- !u!114 &6364514877889284715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41060aface14e9c4ea016dc700d3a6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894720548893655030
 GameObject:
   m_ObjectHideFlags: 0

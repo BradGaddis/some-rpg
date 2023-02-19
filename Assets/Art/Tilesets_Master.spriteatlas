@@ -139,6 +139,11 @@ SpriteAtlas:
   - {fileID: 25361876, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
   - {fileID: 942180938, guid: 8f9cb0203cd839e4c8ac811921081ee0, type: 3}
   - {fileID: 21300000, guid: 35679bf05c030274ab7d5377dd9b57f0, type: 3}
+  - {fileID: 1724527761, guid: d3abd484417bf20438bb99d460fc2474, type: 3}
+  - {fileID: -400155815, guid: d3abd484417bf20438bb99d460fc2474, type: 3}
+  - {fileID: 42645766, guid: d3abd484417bf20438bb99d460fc2474, type: 3}
+  - {fileID: -1206555344, guid: d3abd484417bf20438bb99d460fc2474, type: 3}
+  - {fileID: 497444612, guid: d3abd484417bf20438bb99d460fc2474, type: 3}
   - {fileID: 21300000, guid: ab61ced46c2cd7541867054988b70fa2, type: 3}
   - {fileID: 21300000, guid: 366d8425f5b1f1f4ba4f1efd4d48075f, type: 3}
   - {fileID: 21300000, guid: 24beeda84ba30df45949dd0394a809b5, type: 3}
@@ -234,6 +239,11 @@ SpriteAtlas:
   - BlackBerry Tileset_69
   - BlackBerry Tileset_68
   - frog
+  - slime-Sheet_4
+  - slime-Sheet_2
+  - slime-Sheet_3
+  - slime-Sheet_0
+  - slime-Sheet_1
   - basic_enemy_slime
   - slime
   - apollo-1x
