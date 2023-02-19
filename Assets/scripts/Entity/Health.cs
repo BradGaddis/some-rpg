@@ -23,6 +23,8 @@ public class Health : MonoBehaviour
     {
         
     }
+
+
     virtual public void TakeDamage(int damage) {
         health -= damage;
         if (health <= 0) {
@@ -31,5 +33,13 @@ public class Health : MonoBehaviour
         else {
             Debug.Log(this.gameObject.name + " took " + damage + " damage");
         }
+    }
+    
+    public int GetHealth() {
+        return health;
+    }
+
+    virtual protected void Die(){
+
     }
 }

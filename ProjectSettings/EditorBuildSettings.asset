@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/dialogue testing.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/StartMenu.unity
+    guid: 82cbe61b30a3c4243a715c895497c3f0
   - enabled: 1
-    path: Assets/Scenes/Skills.unity
+    path: Assets/Scenes/Sandbox.unity
+    guid: ebcfaedf67760214ab74f666f16ed870
+  - enabled: 1
+    path: Assets/Scenes/WorldTest.unity
     guid: d45d077bef60fa04e9d5e6a3c5a8b811
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 258861aa0e94e97448a8a917b690aeda
   m_configObjects: {}

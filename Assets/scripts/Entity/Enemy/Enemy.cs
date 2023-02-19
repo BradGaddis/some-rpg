@@ -102,6 +102,7 @@ public class Enemy: MonoBehaviour
         if (attackTimer <= 0) {
             // attack
             Debug.Log("Attacking " + target.name);
+            DealDamage(damage);
             // reset attack timer
             attackTimer = attackSpeed;
         } else {
@@ -114,6 +115,8 @@ public class Enemy: MonoBehaviour
         // deal damage to target
         currentTarget.GetComponent<Health>().TakeDamage(damage);
         Debug.Log("Dealt " + damage + " damage to " + currentTarget.name);
+        // print remaining health
+        Debug.Log(currentTarget.name + " has " + currentTarget.GetComponent<Health>().GetHealth() + " health remaining");
     }
 
     // Take Damage
