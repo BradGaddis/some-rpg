@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Enemy: MonoBehaviour
 {
+    [SerializeField]
+    protected GameObject currentTarget;
+    
+    [Header("Enemy Stats")]
     // Enemy Health
     [SerializeField]
     protected int health = 100;
+    [SerializeField]
+    protected int healthModifier = 1;
     // Enemy Speed
     [SerializeField]
     protected float moveSpeed = 1f;
@@ -19,55 +25,94 @@ public class Enemy: MonoBehaviour
     // Enemy Attack Speed
     [SerializeField]
     protected float attackSpeed = 1f;
-    Vector2 target;
+    [SerializeField]
+    protected float chaseRadius = 2f;
 
-    // Chase Player
-    void ChasePlayer(float attackRadius, float chaseRadius, Vector2 target) {
-        // get distance to player
-        float distanceToPlayer = Vector2.Distance(transform.position, target);
-        // if player is within chase radius
-        if(distanceToPlayer <= chaseRadius) {
-            // if player is within attack radius
-            if(distanceToPlayer <= attackRadius) {
-                // attack player
-                AttackPlayer();
-            } else {
-                // chase player
-                ChasePlayer();
+    [SerializeField]
+    protected List<GameObject> targets = new List<GameObject>();
+
+    [SerializeField]
+    protected bool isDead = false;
+
+    [SerializeField]
+    protected bool isBoss = false;
+
+    [Header("Enemy Attributes")]
+    // Toggle enemy attributes
+    [SerializeField]
+    protected bool chasesTarget = false;
+
+    [SerializeField]
+    protected bool attacksTarget = false;
+    [SerializeField]
+    protected bool takesDamage = false;
+    
+
+    private void Awake() {
+        // set health
+        health = health * healthModifier;
+    }
+
+
+    private void Start() {
+        // resize circle collider to chase radius
+        GetComponent<CircleCollider2D>().radius = chaseRadius;
+    }
+
+    virtual protected void Update() {
+        if (targets.Contains(currentTarget)) {
+            if (chasesTarget) {
+                ChasePlayer(attackRange, chaseRadius, currentTarget);
             }
         }
     }
 
     // enemy type specific chase
-    void ChasePlayer() {
-        
+    protected void ChasePlayer(float attackRadius, float chaseRadius, GameObject target) {
+    float distanceToTarget = GetDistanceToTarget(target.transform);
+    if (distanceToTarget <= chaseRadius) {
+        if (distanceToTarget <= attackRadius) {
+            AttackTarget();
+            // Debug.Log("Attacking Player");
+            } else {
+                // move towards the player's position
+                Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+            }
+        }
     }
 
-    // Attack Player
-    void AttackPlayer() {
+    protected virtual void AttackTarget() {
         StartCoroutine(Attack());
     }
 
-    IEnumerator Attack() {
+    protected virtual IEnumerator Attack() {
         // wait for attack speed
         yield return new WaitForSeconds(attackSpeed);
-        
         // deal damage to player
         DealDamage(damage);
     }
 
-    void DealDamage(float amount) {
-        
+    protected void DealDamage(float amount) {
     }
 
     // Take Damage
-    public void TakeDamage(int damage) {
+    protected void TakeDamage(int damage) {
         health -= damage;
-        Debug.Log("Enemy Health: " + health);
     }
     
     // get distance to player
-    float GetDistanceToPlayer() {
-        return Vector2.Distance(transform.position, target);
+    float GetDistanceToTarget(Transform target) {
+        return Vector2.Distance(transform.position, target.transform.position);
+    }
+
+    private void OnDrawGizmos() {
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, chaseRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        
     }
 }
