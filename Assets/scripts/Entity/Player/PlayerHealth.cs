@@ -9,28 +9,4 @@ public class PlayerHealth : Health
         isPlayer = true;
         isEnemy = false;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // override public void TakeDamage(int damage) {
-    //     health -= damage;
-    //     if (health <= 0) {
-    //         Die();
-    //     }
-    //     else {
-    //         Debug.Log("Player took " + damage + " damage");
-    //     }
-    // }
-
-    override protected void Die() {
-    }
 }

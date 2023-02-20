@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // This is a singleton
     public static LevelManager instance;
 
     private void Awake() {
