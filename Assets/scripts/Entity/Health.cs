@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    protected int health = 100;
+    protected float health = 100;
     [SerializeField]
     protected int healthModifier = 1;    
     [SerializeField]
@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
     }
 
 
-    virtual public void TakeDamage(int damage) {
+    virtual public void TakeDamage(float damage) {
         health -= damage;
         if (health <= 0) {
             Debug.Log(this.gameObject.name + " died");
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
         }
     }
     
-    public int GetHealth() {
+    public float GetHealth() {
         return health;
     }
 

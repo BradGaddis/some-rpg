@@ -113,10 +113,14 @@ public class Enemy: MonoBehaviour
 
     virtual protected void DealDamage(float amount) {
         // deal damage to target
-        currentTarget.GetComponent<Health>().TakeDamage(damage);
-        Debug.Log("Dealt " + damage + " damage to " + currentTarget.name);
+        Debug.Log("Dealt " + amount + " damage to " + currentTarget.name);
         // print remaining health
-        Debug.Log(currentTarget.name + " has " + currentTarget.GetComponent<Health>().GetHealth() + " health remaining");
+        PlayerHealth player = currentTarget.GetComponent<Health>() as PlayerHealth;
+        if (player != null) {
+            Debug.Log(currentTarget.name + " has " + player.GetHealth() + " health remaining");
+            player.TakeDamage(amount);
+        }
+
     }
 
     // Take Damage

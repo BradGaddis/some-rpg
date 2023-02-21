@@ -9,4 +9,12 @@ public class PlayerHealth : Health
         isPlayer = true;
         isEnemy = false;
     }
+
+    override public void TakeDamage(float damage) {
+        base.TakeDamage(damage);
+        if (health <= 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Player died");
+        }
+    }
 }
