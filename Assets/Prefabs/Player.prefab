@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 894720548169736827}
   - component: {fileID: 6364514877889284715}
   - component: {fileID: 4134242522598210650}
+  - component: {fileID: 1211850193950366015}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -112,10 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41060aface14e9c4ea016dc700d3a6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  currentHealth: 100
+  maxHealth: 100
   healthModifier: 1
   isPlayer: 1
   isEnemy: 0
+  playerStats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
 --- !u!114 &4134242522598210650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +131,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96210a84c6df8e34d858ff826e5e2cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1211850193950366015
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &894720548893655030
 GameObject:
   m_ObjectHideFlags: 0

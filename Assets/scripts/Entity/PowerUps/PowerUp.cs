@@ -10,7 +10,7 @@ public class PowerUp : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.ShowFloatingText($"{this.gameObject.name} collected!", 20, Color.black, transform.position, Vector3.up, 1f);
+            FloatingTextManager.instance.ShowFloatingText($"{this.gameObject.name} collected!", 20, Color.black, transform.position, Vector3.up, 1f);
 
             // add power up to player
             other.gameObject.GetComponent<PlayerController>().AddPowerUp(this);

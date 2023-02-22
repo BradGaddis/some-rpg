@@ -12,8 +12,13 @@ public class PlayerHealth : Health
         isEnemy = false;
     }
 
+    void Update()
+    {
+        playerStats.health = Mathf.Clamp(playerStats.health, 0, maxHealth);
+    }
+
     override public void TakeDamage(float damage) {
-        base.TakeDamage(damage);
+        playerStats.health -= damage;
         if (currentHealth <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Player died");
@@ -21,14 +26,15 @@ public class PlayerHealth : Health
     }
 
     override public float GetHealth() {
-        return 0;
+        currentHealth = playerStats.health;
+        return currentHealth;
     }
 
     private void SetHealth(float health) {
         this.currentHealth = playerStats.health;
     }
 
-    private void ResetFullHealth() {
-        currentHealth = maxHealth;
+    public void ResetFullHealth() {
+        playerStats.health = maxHealth;
     }
 }

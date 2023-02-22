@@ -32,4 +32,14 @@ public class DebugDropdownHandler : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+
+    public void HandleResetHealthButton()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerHealth>().ResetFullHealth();
+        }
+    }
 }

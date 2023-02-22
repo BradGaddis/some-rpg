@@ -5,23 +5,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // [SerializeField]
     float runSpeed;
     // stats stribable object
-    [SerializeField]
-    Stats stats;
-    
-    // stats
-    int health;
-    int damage;
+    [SerializeField] Stats stats;
     int speed;
-    [SerializeField]
-    float jumpForce;
-    [SerializeField]
-    [Header("The Player Size Mid-Jump")]
-    float jumpSize;
+    [SerializeField] float jumpForce;
+    [SerializeField] [Header("The Player Size Mid-Jump")] float jumpSize; // TODO: make this actually work
 
-    Tool hammer = new Tool();
+    Tool hammer = new Tool(); // I don't remember why I did this. I think it was purely for shits and giggles
 
     
     // Player State Machine
@@ -32,10 +23,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // get stats
+        
+        // update stats from stats scriptable object
         runSpeed = stats.GetSpeed();
-        health = stats.GetHealth();
-        damage = stats.GetDamage();
         jumpForce = stats.GetJumpForce(); // this it the scale the player will be scaled to when "jumping"
     }
 

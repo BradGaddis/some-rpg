@@ -4,13 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Stats", menuName = "Stats")]
 public class Stats : ScriptableObject
 {
-    public int health;
+    public float health;
     public int damage;
     public float speed;
     public float jumpForce;
 
     // get stats
-    public int GetHealth() {
+    public float GetHealth() {
         return health;
     }
 

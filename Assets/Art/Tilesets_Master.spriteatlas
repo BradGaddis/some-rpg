@@ -150,8 +150,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d8328035f00b0d843be874e127ff95d4, type: 3}
   - {fileID: 21300000, guid: 694e3eb569fa07548923cf55c15693e6, type: 3}
   - {fileID: 21300000, guid: 0eb3a55710da5244e809cc23ee74c18c, type: 3}
+  - {fileID: 21300000, guid: c807e1087ad94af43bf1b0e3c6b48170, type: 3}
   - {fileID: 21300000, guid: 24beeda84ba30df45949dd0394a809b5, type: 3}
   - {fileID: 21300000, guid: 633fcc9adb8c9114eafd1b7f538fad15, type: 3}
+  - {fileID: -2021362577, guid: 10d9cbbaa9b713142962af25beb26a46, type: 3}
+  - {fileID: -1258829264, guid: 10d9cbbaa9b713142962af25beb26a46, type: 3}
   - {fileID: 21300000, guid: 2381c2cd316ba3c4f9e93fe5d8b6c457, type: 3}
   m_PackedSpriteNamesToIndex:
   - BlackBerry Tileset_18
@@ -255,8 +258,11 @@ SpriteAtlas:
   - playeridle
   - Leonardo_Creative_A_woman_with_wings_that_can_have_one_arm_transition_into_a_w_3
     (1)
+  - playeridle-Idle Front
   - apollo-1x
   - player shadow
+  - playeridle-punch 1_1
+  - playeridle-punch 1_0
   - player
   m_RenderDataMap: {}
   m_Tag: Tilesets_Master

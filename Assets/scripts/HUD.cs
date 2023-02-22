@@ -20,7 +20,6 @@ public class HUD : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        Object.DontDestroyOnLoad(gameObject);
         // find slider by name
         playerHealthSlider = GameObject.Find("Health Bar").GetComponent<Slider>();
         playerHealth = FindObjectOfType<PlayerHealth>();
