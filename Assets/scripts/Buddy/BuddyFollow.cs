@@ -20,11 +20,11 @@ public class BuddyFollow : MonoBehaviour
     float moveSpeed;
 
     private void Start() {
-        targetRB = targetToFollow.GetComponent<Rigidbody2D>();
         newOffset = offset;
         if (targetToFollow == null) {
             targetToFollow = GameObject.FindGameObjectWithTag("Player");
         }
+        targetRB = targetToFollow.GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
