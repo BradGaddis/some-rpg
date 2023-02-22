@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : Health
 {
+    [SerializeField] Stats playerStats;
+
     private void Awake() {
         isPlayer = true;
         isEnemy = false;
@@ -12,9 +14,21 @@ public class PlayerHealth : Health
 
     override public void TakeDamage(float damage) {
         base.TakeDamage(damage);
-        if (health <= 0) {
+        if (currentHealth <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("Player died");
         }
+    }
+
+    override public float GetHealth() {
+        return 0;
+    }
+
+    private void SetHealth(float health) {
+        this.currentHealth = playerStats.health;
+    }
+
+    private void ResetFullHealth() {
+        currentHealth = maxHealth;
     }
 }

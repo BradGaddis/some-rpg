@@ -4,30 +4,16 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField]
-    protected float health = 100;
-    [SerializeField]
-    protected int healthModifier = 1;    
-    [SerializeField]
-    protected bool isPlayer = true;
-    [SerializeField]
-    protected bool isEnemy = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected float currentHealth = 100;
+    [SerializeField] protected float maxHealth = 100;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [SerializeField] protected int healthModifier = 1;    
+    [SerializeField] protected bool isPlayer = true;
+    [SerializeField] protected bool isEnemy = false;
 
     virtual public void TakeDamage(float damage) {
-        health -= damage;
-        if (health <= 0) {
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
             Debug.Log(this.gameObject.name + " died");
         }
         else {
@@ -35,8 +21,8 @@ public class Health : MonoBehaviour
         }
     }
     
-    public float GetHealth() {
-        return health;
+    virtual public float GetHealth() {
+        return currentHealth;
     }
 
     virtual protected void Die(){
