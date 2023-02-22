@@ -22,6 +22,9 @@ public class BuddyFollow : MonoBehaviour
     private void Start() {
         targetRB = targetToFollow.GetComponent<Rigidbody2D>();
         newOffset = offset;
+        if (targetToFollow == null) {
+            targetToFollow = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     private void Update() {

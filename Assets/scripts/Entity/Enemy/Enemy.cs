@@ -56,6 +56,10 @@ public class Enemy: MonoBehaviour
     virtual protected void Start() {
         // resize circle collider to chase radius
         GetComponent<CircleCollider2D>().radius = chaseRadius;
+        if (currentTarget == null) {
+            currentTarget = GameObject.FindGameObjectWithTag("Player");
+            targets.Add(currentTarget);
+        }
     }
 
     virtual protected void Update() {

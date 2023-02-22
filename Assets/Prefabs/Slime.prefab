@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2381402033419506027}
   - component: {fileID: 5434990379357597223}
   m_Layer: 0
-  m_Name: Player Shadow (1)
+  m_Name: Sime Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
