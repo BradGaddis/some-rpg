@@ -21,6 +21,7 @@ public class PlayerHealth : Health
         playerStats.health -= damage;
         if (currentHealth <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            ResetFullHealth();
             Debug.Log("Player died");
         }
     }

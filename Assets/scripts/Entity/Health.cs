@@ -8,13 +8,14 @@ public class Health : MonoBehaviour, ITakeDamage
     [SerializeField] protected float maxHealth = 100;
 
     [SerializeField] protected int healthModifier = 1;    
-    [SerializeField] protected bool isPlayer = true;
-    [SerializeField] protected bool isEnemy = false;
+    [SerializeField] protected bool isPlayer = false;
+    [SerializeField] protected bool isEnemy = true;
 
     virtual public void TakeDamage(float damage) {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             Debug.Log(this.gameObject.name + " died");
+            Die();
         }
         else {
             Debug.Log(this.gameObject.name + " took " + damage + " damage");
@@ -26,6 +27,6 @@ public class Health : MonoBehaviour, ITakeDamage
     }
 
     virtual protected void Die(){
-
+            Destroy(this.gameObject);
     }
 }

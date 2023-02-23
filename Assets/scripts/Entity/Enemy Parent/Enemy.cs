@@ -3,17 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy: MonoBehaviour, ITakeDamage
+
+[RequireComponent(typeof(Health))]
+public class Enemy: MonoBehaviour
 {
     [SerializeField]
     protected GameObject currentTarget;
     
     [Header("Enemy Stats")]
     // Enemy Health
-    [SerializeField]
-    protected float health = 100;
-    [SerializeField]
-    protected int healthModifier = 1;
     // Enemy Speed
     [SerializeField]
     protected float moveSpeed = 1f;
@@ -47,12 +45,6 @@ public class Enemy: MonoBehaviour, ITakeDamage
     protected bool takesDamage = false;
     
 
-    virtual protected void Awake() {
-        // set health
-        health = health * healthModifier;
-    }
-
-
     virtual protected void Start() {
         // resize circle collider to chase radius
         GetComponent<CircleCollider2D>().radius = chaseRadius;
@@ -66,11 +58,6 @@ public class Enemy: MonoBehaviour, ITakeDamage
         if (targets.Contains(currentTarget)) {
             if (chasesTarget) {
                 ChasePlayer(attackRange, chaseRadius, currentTarget);
-            }
-        }
-        if (takesDamage) {
-            if (health <= 0) {
-                Die();
             }
         }
     }
@@ -105,7 +92,6 @@ public class Enemy: MonoBehaviour, ITakeDamage
         // if attack timer is 0, attack
         if (attackTimer <= 0) {
             // attack
-            Debug.Log("Attacking " + target.name);
             DealDamage(damage);
             // reset attack timer
             attackTimer = attackSpeed;
@@ -117,24 +103,12 @@ public class Enemy: MonoBehaviour, ITakeDamage
 
     virtual protected void DealDamage(float amount) {
         // deal damage to target
-        Debug.Log("Dealt " + amount + " damage to " + currentTarget.name);
         // print remaining health
         PlayerHealth player = currentTarget.GetComponent<Health>() as PlayerHealth;
         if (player != null) {
-            Debug.Log(currentTarget.name + " has " + player.GetHealth() + " health remaining");
             player.TakeDamage(amount);
         }
 
-    }
-
-    // Take Damage
-    virtual public void TakeDamage(float damage) {
-        health -= damage;
-    }
-    
-    virtual protected void Die() {
-        // Destroy enemy
-        Destroy(gameObject);
     }
 
 
@@ -151,8 +125,4 @@ public class Enemy: MonoBehaviour, ITakeDamage
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-
-    public float GetHealth() {
-        return health;
-    }
 }

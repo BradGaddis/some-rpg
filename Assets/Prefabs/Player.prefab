@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 894720548169736824}
   - component: {fileID: 894720548169736827}
   - component: {fileID: 6364514877889284715}
-  - component: {fileID: 4134242522598210650}
   - component: {fileID: 1211850193950366015}
   - component: {fileID: 2341091269094236702}
   - component: {fileID: 6255178895459146561}
@@ -121,20 +120,6 @@ MonoBehaviour:
   isPlayer: 1
   isEnemy: 0
   playerStats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
---- !u!114 &4134242522598210650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894720548169736770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96210a84c6df8e34d858ff826e5e2cea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDuration: 2
-  attackDamage: 10
 --- !u!95 &1211850193950366015
 Animator:
   serializedVersion: 4
@@ -167,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4997596089dee541b070eb4b4ef0ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardPunchAttackDuration: 2
+  postAttackDelay: 2
 --- !u!212 &6255178895459146561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -341,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3633752795492543744}
   - component: {fileID: 1116125539112674162}
+  - component: {fileID: 1886278833}
   m_Layer: 0
   m_Name: Forward Punch
   m_TagString: Untagged
@@ -379,3 +365,18 @@ CircleCollider2D:
   m_Offset: {x: 0.76, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1886278833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512395510119857874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7268b0157d07e41ad80101ae05ef00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 2
+  attackDamage: 10
+  attackCollider: {fileID: 0}
