@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy: MonoBehaviour
+public class Enemy: MonoBehaviour, ITakeDamage
 {
     [SerializeField]
     protected GameObject currentTarget;
@@ -11,7 +11,7 @@ public class Enemy: MonoBehaviour
     [Header("Enemy Stats")]
     // Enemy Health
     [SerializeField]
-    protected int health = 100;
+    protected float health = 100;
     [SerializeField]
     protected int healthModifier = 1;
     // Enemy Speed
@@ -128,7 +128,7 @@ public class Enemy: MonoBehaviour
     }
 
     // Take Damage
-    virtual protected void TakeDamage(int damage) {
+    virtual public void TakeDamage(float damage) {
         health -= damage;
     }
     
@@ -149,5 +149,10 @@ public class Enemy: MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+
+    public float GetHealth() {
+        return health;
     }
 }
