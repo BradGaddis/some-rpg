@@ -34,9 +34,13 @@ public class PlayerAnimationHandler : MonoBehaviour
     }
 
     public IEnumerator ForwardPunchAttack() {
-        animator.SetBool("isAttacking", true);
+        animator.SetTrigger("attackTrigger");
+        // animator.SetBool("isAttacking", false);
+        Debug.Log("StartAttack");
         yield return new WaitForSeconds(_forwardPunchAttackDuration);
-        animator.SetBool("isAttacking", false);
+        animator.SetTrigger("attackTrigger");
+        // animator.SetBool("isAttacking", false);
+        Debug.Log("EndAttack");
     }
     
 }
