@@ -17,6 +17,11 @@ public class PlayerAnimationHandler : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update() {
+        animator.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+        animator.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+    }
+
     public void StartForwardPunchAttack() {
         StartCoroutine(ForwardPunchAttack());
     }

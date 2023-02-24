@@ -156,6 +156,8 @@ SpriteAtlas:
   - {fileID: -2021362577, guid: 10d9cbbaa9b713142962af25beb26a46, type: 3}
   - {fileID: -1258829264, guid: 10d9cbbaa9b713142962af25beb26a46, type: 3}
   - {fileID: 21300000, guid: 2381c2cd316ba3c4f9e93fe5d8b6c457, type: 3}
+  - {fileID: 21300000, guid: 7f92e48fd6abfc440b3130c9344eddde, type: 3}
+  - {fileID: 21300000, guid: dae3f5bf361d97b42b9a0a43e554cd73, type: 3}
   m_PackedSpriteNamesToIndex:
   - BlackBerry Tileset_18
   - BlackBerry Tileset_61
@@ -264,6 +266,8 @@ SpriteAtlas:
   - playeridle-punch 1_1
   - playeridle-punch 1_0
   - player
+  - playeridle-IDLE DR
+  - playeridle-IDLE DL
   m_RenderDataMap: {}
   m_Tag: Tilesets_Master
   m_IsVariant: 0

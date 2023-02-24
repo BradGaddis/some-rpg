@@ -14,8 +14,7 @@ public class PlayerAttack : MonoBehaviour
     // Collider2D[] attackHitboxes;
     [SerializeField] float attackDuration = 2f;
     [SerializeField] float attackDamage = 10f;
-    [SerializeField] float impactTime = 0.5f;
-    private float impactTimer = 0f;
+    [SerializeField] float timeTilImpact = 0.5f;
     private CircleCollider2D attackCollider;
     private bool canAttack = true;
     private bool isAttacking = false;
@@ -30,27 +29,33 @@ public class PlayerAttack : MonoBehaviour
         // attackObject.SetActive(false);
         attackCollider = this.gameObject.GetComponent<CircleCollider2D>();
         // attackCollider.enabled = false;
-        impactTimer = impactTime;
+        timeTilImpact = timeTilImpact > 0 ? timeTilImpact : 0;
     }
 
     virtual protected void Update() {
         // use V key to attack
-        DoAttack();
+        InitiateAttack();
     }
 
-    virtual public void DoAttack() {
+    virtual public void InitiateAttack() {
         if (Input.GetKeyDown(KeyCode.V) && canAttack) {
             canAttack = false;
             // isAttacking = true;
+
+            // Purely for animation purposes
             playerAnimation.StartForwardPunchAttack();
             StartCoroutine(AttackDuration());
         }
     }
 
     virtual protected IEnumerator AttackDuration() {
-        yield return new WaitForSeconds(impactTime);
-        // This is the actual duration of the attack 
+        if(timeTilImpact > 0)
+        {
+            yield return new WaitForSeconds(timeTilImpact);
+        }
+        // This block is the actual duration of the attack 
         isAttacking = true;
+        // This method handles the actual attack
         AttackEnemy();
         yield return new WaitForSeconds(attackDuration);
         // This is the end of the attack
@@ -65,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
 
     virtual public void DealDamage(float damage, Enemy enemy) {
         Health enemyHealth = enemy.GetComponent<Health>();
-        enemyHealth.TakeDamage(damage);
+        if(enemyHealth != null) enemyHealth.TakeDamage(damage);
     }
 
     virtual protected void AttackEnemy(){
@@ -86,8 +91,4 @@ public class PlayerAttack : MonoBehaviour
 
     }    
 
-
-    private IEnumerator ImpactTimer() {
-        yield return new WaitForSeconds(impactTime);
-    }
 }
