@@ -14,10 +14,12 @@ public class PlayerAttack : MonoBehaviour
     // Collider2D[] attackHitboxes;
     [SerializeField] float attackDuration = 2f;
     [SerializeField] float attackDamage = 10f;
-    private CircleCollider2D attackCollider;
-    bool canAttack = true;
     [SerializeField] float impactTime = 0.5f;
     private float impactTimer = 0f;
+    private CircleCollider2D attackCollider;
+    private bool canAttack = true;
+    private bool isAttacking = false;
+    private bool wasHit = false;
 
     
 
@@ -27,28 +29,34 @@ public class PlayerAttack : MonoBehaviour
         // attackCollider = attackHitboxes[Array.FindIndex(attackHitboxes,gameo => gameo.gameObject.name == "Forward Punch") ];
         // attackObject.SetActive(false);
         attackCollider = this.gameObject.GetComponent<CircleCollider2D>();
-        attackCollider.enabled = false;
+        // attackCollider.enabled = false;
         impactTimer = impactTime;
     }
 
     virtual protected void Update() {
-        StartAttack();
+        // use V key to attack
+        DoAttack();
     }
 
-    virtual public void StartAttack() {
+    virtual public void DoAttack() {
         if (Input.GetKeyDown(KeyCode.V) && canAttack) {
             canAttack = false;
+            // isAttacking = true;
             playerAnimation.StartForwardPunchAttack();
-            StartCoroutine(Attack());
+            StartCoroutine(AttackDuration());
         }
     }
 
-    virtual protected IEnumerator Attack() {
+    virtual protected IEnumerator AttackDuration() {
         yield return new WaitForSeconds(impactTime);
-        attackCollider.enabled = true;
+        // This is the actual duration of the attack 
+        isAttacking = true;
+        AttackEnemy();
         yield return new WaitForSeconds(attackDuration);
-        attackCollider.enabled = false;
+        // This is the end of the attack
         canAttack = true;
+        isAttacking = false;
+        wasHit = false;
     }
 
     // virtual protected  void GetAttackHitboxes() {
@@ -60,35 +68,26 @@ public class PlayerAttack : MonoBehaviour
         enemyHealth.TakeDamage(damage);
     }
 
-
-    virtual protected void OnTriggerEnter2D(Collider2D other) {
-        Component[] components = other.gameObject.GetComponents(typeof(Component));
-        Enemy enemy = null;
-
-        foreach (Component component in components) {
-            if (component  as Enemy) {
-                enemy = component as Enemy;
-                DealDamage(attackDamage, enemy);
-                break;
+    virtual protected void AttackEnemy(){
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCollider.bounds.center, attackCollider.radius);
+        // find the enemy by components 
+        foreach (Collider2D collider in colliders) {
+            Component[] components = collider.gameObject.GetComponents(typeof(Component));
+            Enemy enemy = null;
+            foreach (Component component in components) {
+                if (component as Enemy && isAttacking && !wasHit){
+                    enemy = component as Enemy;
+                    wasHit = true;          
+                    DealDamage(attackDamage, enemy);
+                    break;
+                }
             }
         }
-    }
 
-    virtual protected void OntriggerStay2D(Collider2D other) {
-        Component[] components = other.gameObject.GetComponents(typeof(Component));
-        Enemy enemy = null;
+    }    
 
-        foreach (Component component in components) {
-            if (component as Enemy && canAttack) {
-                enemy = component as Enemy;
-                DealDamage(attackDamage, enemy);
-                break;
-            }
-        }
-    }
 
     private IEnumerator ImpactTimer() {
         yield return new WaitForSeconds(impactTime);
-
     }
 }

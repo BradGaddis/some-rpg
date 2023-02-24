@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 894720548169736772}
   - component: {fileID: 894720548169736774}
   - component: {fileID: 894720548169736824}
+  - component: {fileID: 1211850193950366015}
+  - component: {fileID: 6255178895459146561}
   - component: {fileID: 894720548169736827}
   - component: {fileID: 6364514877889284715}
-  - component: {fileID: 1211850193950366015}
   - component: {fileID: 2341091269094236702}
-  - component: {fileID: 6255178895459146561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -87,39 +87,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5021534, y: 0.800434}
   m_EdgeRadius: 0
---- !u!114 &894720548169736827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894720548169736770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bbc809bc229b0d4f91f5c7edd96a51e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
-  jumpForce: 0
-  jumpSize: 1
---- !u!114 &6364514877889284715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894720548169736770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41060aface14e9c4ea016dc700d3a6bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
-  healthModifier: 1
-  isPlayer: 1
-  isEnemy: 0
-  playerStats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
 --- !u!95 &1211850193950366015
 Animator:
   serializedVersion: 4
@@ -140,19 +107,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2341091269094236702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894720548169736770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4997596089dee541b070eb4b4ef0ba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  postForwardPunchDelay: 0.5
 --- !u!212 &6255178895459146561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -205,6 +159,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &894720548169736827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bbc809bc229b0d4f91f5c7edd96a51e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
+  jumpForce: 0
+  jumpSize: 1
+--- !u!114 &6364514877889284715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41060aface14e9c4ea016dc700d3a6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  healthModifier: 1
+  isPlayer: 1
+  isEnemy: 0
+  playerStats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
+--- !u!114 &2341091269094236702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4997596089dee541b070eb4b4ef0ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postForwardPunchDelay: 0.5
 --- !u!1 &894720549447380204
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,3 +379,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDuration: 1.5
   attackDamage: 10
+  impactTime: 0.5
