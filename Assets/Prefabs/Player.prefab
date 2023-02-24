@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4997596089dee541b070eb4b4ef0ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postAttackDelay: 2
+  postForwardPunchDelay: 0.5
 --- !u!212 &6255178895459146561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -377,6 +377,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7268b0157d07e41ad80101ae05ef00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDuration: 2
+  attackDuration: 1.5
   attackDamage: 10
-  attackCollider: {fileID: 0}

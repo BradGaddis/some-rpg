@@ -6,21 +6,18 @@ public class PlayerAnimationHandler : MonoBehaviour
 {
     private Animator animator;
     private AnimatorClipInfo[] _animatorClipInfo;
-
     private float animLen;
 
-    [SerializeField] private float postAttackDelay = 0f;
+    [SerializeField] private float postForwardPunchDelay = 0f;
 
-    PlayerAttack[] attacks;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        attacks = GetComponents<PlayerAttack>();
     }
 
-    public void StartAttack() {
+    public void StartForwardPunchAttack() {
         StartCoroutine(ForwardPunchAttack());
     }
 
@@ -38,7 +35,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     public IEnumerator ForwardPunchAttack() {
         animator.SetTrigger("attackTrigger");
         yield return StartCoroutine(GetAnimationClipInfo());
-        float attackLength = GetAnimationClipLength() + postAttackDelay;
+        float attackLength = GetAnimationClipLength() + postForwardPunchDelay;
         yield return new WaitForSeconds(attackLength);
         animator.SetTrigger("attackTrigger");
     }
