@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO
+// Refactor this as a parent class
+
 public class PlayerAnimationHandler : MonoBehaviour
 {
     [SerializeField] private float postAttackDelay = 0f;
@@ -25,8 +29,8 @@ public class PlayerAnimationHandler : MonoBehaviour
     }
 
     private void Update() {
-        animator.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-        animator.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("MoveX", playerInput.GetMoveDirection().x);
+        animator.SetFloat("MoveY", playerInput.GetMoveDirection().y);
         if (playerInput.IsMoving()) {
             moveDirection = playerInput.GetMoveDirection();
         }

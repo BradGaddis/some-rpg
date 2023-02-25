@@ -95,7 +95,6 @@ public class PlayerAttack : MonoBehaviour
         // if particles are finished playing, stop them
         // Destroy(attackParticles, 0.5f);
     }
-
     
     virtual protected void AttackEnemy() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCollider.bounds.center, attackCollider.radius);

@@ -47,4 +47,8 @@ public class PlayerInput : MonoBehaviour
         return moveHorizontal != 0 || moveVertical != 0;
     }
 
+    public bool Jump() {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
 }

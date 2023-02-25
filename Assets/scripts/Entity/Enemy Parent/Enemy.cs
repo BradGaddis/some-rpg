@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO
+// add floating text on impact
 
 [RequireComponent(typeof(Health))]
 public class Enemy: MonoBehaviour, IDamageable
@@ -111,9 +113,7 @@ public class Enemy: MonoBehaviour, IDamageable
         if (player != null) {
             player.ReduceHealth(amount);
         }
-
     }
-
 
     // get distance to player
     virtual protected float GetDistanceToTarget(Transform target) {
@@ -135,6 +135,6 @@ public class Enemy: MonoBehaviour, IDamageable
 
     public float GetHealth()
     {
-        return -1;
+        return health.GetHealth();
     }
 }

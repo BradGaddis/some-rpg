@@ -33,13 +33,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
        playerInput.HandleMovement(runSpeed, currentState, rb, lockedMovement);
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     StartCoroutine(Jump());
-        // }
+        if (playerInput.Jump())
+        {
+            StartCoroutine(Jump());
+        }
     }
-
-   
     
     //  TODO fix double call
     IEnumerator Jump() {
