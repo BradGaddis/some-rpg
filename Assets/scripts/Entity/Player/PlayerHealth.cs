@@ -17,7 +17,7 @@ public class PlayerHealth : Health
         playerStats.health = Mathf.Clamp(playerStats.health, 0, maxHealth);
     }
 
-    override public void TakeDamage(float damage) {
+    override public void ReduceHealth(float damage) {
         playerStats.health -= damage;
         if (currentHealth <= 0) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

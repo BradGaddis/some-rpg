@@ -96,33 +96,18 @@ public class PlayerAttack : MonoBehaviour
         // Destroy(attackParticles, 0.5f);
     }
 
-    // virtual protected  void GetAttackHitboxes() {
-    //     attackHitboxes = GetComponentsInChildren<Collider2D>();
-    // }
-
-    virtual public void DealDamage(float damage, Enemy enemy) {
-        Health enemyHealth = enemy.GetComponent<Health>();
-        if(enemyHealth != null) enemyHealth.TakeDamage(damage);
-    }
-
-    // TODO : refactor this method with interface
-    virtual protected void AttackEnemy(){
+    
+    virtual protected void AttackEnemy() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCollider.bounds.center, attackCollider.radius);
         // find the enemy by components 
         foreach (Collider2D collider in colliders) {
-            Component[] components = collider.gameObject.GetComponents(typeof(Component));
-            Enemy enemy = null;
-            foreach (Component component in components) {
-                if (component as Enemy && isAttacking && !enemyWasHit){
-                    attackParticles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
-                    enemy = component as Enemy;
-                    enemyWasHit = true;       
-                    DealDamage(attackDamage, enemy);
-                    break;
-                }
+            if (collider.TryGetComponent<IDamageable>(out IDamageable damageable) && isAttacking && !enemyWasHit){
+                attackParticles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
+                enemyWasHit = true;       
+                damageable.TakeDamage(attackDamage);
+                break;
             }
         }
-
-    }    
+    }
 
 }

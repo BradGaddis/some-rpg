@@ -44,6 +44,8 @@ public class Enemy: MonoBehaviour, IDamageable
     [SerializeField]
     protected bool takesDamage = false;
     
+    Health health;
+
 
     virtual protected void Start() {
         // resize circle collider to chase radius
@@ -52,6 +54,7 @@ public class Enemy: MonoBehaviour, IDamageable
             currentTarget = GameObject.FindGameObjectWithTag("Player");
             targets.Add(currentTarget);
         }
+        health = GetComponent<Health>();
     }
 
     virtual protected void Update() {
@@ -106,7 +109,7 @@ public class Enemy: MonoBehaviour, IDamageable
         // print remaining health
         PlayerHealth player = currentTarget.GetComponent<Health>() as PlayerHealth;
         if (player != null) {
-            player.TakeDamage(amount);
+            player.ReduceHealth(amount);
         }
 
     }
@@ -127,6 +130,7 @@ public class Enemy: MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        health.ReduceHealth(damage);
     }
 
     public float GetHealth()

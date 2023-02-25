@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] protected bool isPlayer = false;
     [SerializeField] protected bool isEnemy = true;
 
-    virtual public void TakeDamage(float damage) {
+    virtual public void ReduceHealth(float damage) {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             Debug.Log(this.gameObject.name + " died");
