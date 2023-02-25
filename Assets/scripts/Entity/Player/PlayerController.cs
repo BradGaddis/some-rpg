@@ -5,26 +5,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float runSpeed;
+    [Header("This is a test to see if I like the movement locked or not. Just for toggle")] [SerializeField] bool lockedMovement;
+    [SerializeField] [Header("The Player Size Mid-Jump")] float jumpSize; // TODO: make this actually work
     // stats stribable object
     [SerializeField] Stats stats;
-    [Header("This is a test to see if I like the movement locked or not. Just for toggle")] [SerializeField] bool lockedMovement;
-    int speed;
     [SerializeField] float jumpForce;
-    [SerializeField] [Header("The Player Size Mid-Jump")] float jumpSize; // TODO: make this actually work
 
-    Tool hammer = new Tool(); // I don't remember why I did this. I think it was purely for shits and giggles
-
-    
     // Player State Machine
     PlayerStateMachine currentState = new PlayerStateMachine(PlayerState.Idle);
+    float runSpeed;
 
+    // Component References
+    PlayerInput playerInput;
     Rigidbody2D rb;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        playerInput = GetComponent<PlayerInput>();
         // update stats from stats scriptable object
         runSpeed = stats.GetSpeed();
         jumpForce = stats.GetJumpForce(); // this it the scale the player will be scaled to when "jumping"
@@ -33,43 +32,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentState.state != PlayerState.Interacting)
-        {
-            HandleMovement(Input.GetAxisRaw("Horizontal"), 
-                        Input.GetAxisRaw("Vertical"));   
-        } 
-        else
-        {   
-            HandleMovement(0, 0);
-        }
-
-        // only call once per frame
-        if (Input.GetKeyDown (KeyCode.Space) && currentState.state != PlayerState.Jumping) {
-            StartCoroutine (Jump());
-        }   
-
-        HandleActions();
+       playerInput.HandleMovement(runSpeed, currentState, rb, lockedMovement);
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     StartCoroutine(Jump());
+        // }
     }
 
-    // private void HandleMovement(float moveHorizontal, float moveVertical) => rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
-    // movement
-    private void HandleMovement(float moveHorizontal, float moveVertical)
-    {
-        if (moveHorizontal != 0 || moveVertical != 0)
-        {
-            currentState.ChangeState(PlayerState.Running);
-        }
-        else
-        {
-            currentState.ChangeState(PlayerState.Idle);
-        }
-        // lock diagonal movement
-        if (moveHorizontal != 0 && moveVertical != 0 && lockedMovement)
-        {
-            moveHorizontal = 0;
-        }
-        rb.velocity = new Vector2(moveHorizontal, moveVertical).normalized * runSpeed;
-    }
+   
     
     //  TODO fix double call
     IEnumerator Jump() {
@@ -103,45 +73,5 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Power Up Collected: " + powerUp.name);
     }
 
-    // switch tool
-    IEnumerator UseTool(Tool tool = null) {
-        // hold state
-        PlayerState prevState = currentState.state;
-        currentState.ChangeState(PlayerState.Interacting);
-        Debug.Log("Using tool: " + tool.name);
-        yield return new WaitForSeconds(1f);
-        currentState.ChangeState(prevState);
-    }
-
-    // action handler
-    public void HandleActions() {
-        if (Input.GetKeyDown (KeyCode.E) && currentState.state != PlayerState.Jumping) {
-            StartCoroutine (UseTool(hammer));
-        }
-    }
-}
-
-// Tool class
-public class Tool {
-    // tool name
-    public string name;
-    // tool damage
-    int damage;
-    // tool speed
-    int speed;
-    // tool range
-    int range;
-    // tool cooldown
-    float cooldown;
-    // tool type
-    string type;
-
-    public Tool(string name = "Hammer", int damage = 1, int speed = 1, int range = 1, float cooldown = 1f, string type = "melee") {
-        this.name = name;
-        this.damage = damage;
-        this.speed = speed;
-        this.range = range;
-        this.cooldown = cooldown;
-        this.type = type;
-    }
+   
 }

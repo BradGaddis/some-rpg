@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 894720548169736827}
   - component: {fileID: 6364514877889284715}
   - component: {fileID: 2341091269094236702}
+  - component: {fileID: 1139678139}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -171,9 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbc809bc229b0d4f91f5c7edd96a51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedMovement: 1
+  jumpSize: 1
   stats: {fileID: 11400000, guid: c4a63de90f6086941a75cdc0b0a2ecb4, type: 2}
   jumpForce: 0
-  jumpSize: 1
 --- !u!114 &6364514877889284715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +207,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postForwardPunchDelay: 0.5
+  isFlippable: 1
+--- !u!114 &1139678139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894720548169736770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746683ed0fb5fed4487beae90a4fc292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894720549447380204
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +377,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.76, y: 0}
+  m_Offset: {x: 1, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!114 &1886278833

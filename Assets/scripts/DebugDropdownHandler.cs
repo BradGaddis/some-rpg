@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class DebugDropdownHandler : MonoBehaviour
 {
     Transform dropdown;
+    bool hide = false;
     void Start()
     {
-        dropdown = transform.Find("Dropdown");
-        dropdown.gameObject.SetActive(false);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            if (dropdown != null)
-                dropdown.gameObject.SetActive(!dropdown.gameObject.activeSelf);
-            else {
-                Debug.LogError("No dropdown found in children of DebugDropdownHandler");
-            }
+            if (hide)
+                Hide();
+            else
+                Show();
         }
     }
     public void HandleDropdownValueChanged(int index)
@@ -40,6 +39,21 @@ public class DebugDropdownHandler : MonoBehaviour
         foreach (GameObject player in players)
         {
             player.GetComponent<PlayerHealth>().ResetFullHealth();
+        }
+    }
+
+    public void Show()
+    {
+        hide = true;
+        foreach(Transform child in transform){
+            child.gameObject.SetActive(true);
+        }
+    }
+    public void Hide()
+    {
+        hide = false;
+        foreach(Transform child in transform){
+            child.gameObject.SetActive(false);
         }
     }
 }

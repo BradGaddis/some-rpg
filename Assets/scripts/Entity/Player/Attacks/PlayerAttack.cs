@@ -8,45 +8,44 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    PlayerAnimationHandler playerAnimation;
     // Collider2D[] attackHitboxes;
     [SerializeField] float attackDuration = 2f;
     [SerializeField] float attackDamage = 10f;
     [SerializeField] float timeTilImpact = 0.5f;
-    private CircleCollider2D attackCollider;
     private bool canAttack = true;
     private bool isAttacking = false;
-    private bool wasHit = false;
+    private bool enemyWasHit = false;
+    private Vector3 moveDir;
+    private float attackRange;  
+    private float attackAOE;
+    private Vector3 prevPos;
 
-    Vector3 inputMovement;
-    Vector3 attackRange;  
-    float attackAOE;
-    Vector3 prevPos;
+    // Componenet References
+    [SerializeField] ParticleSystem attackParticles;
+    private CircleCollider2D attackCollider;
+    private PlayerAnimationHandler playerAnimation;
+    private PlayerInput playerInput;
 
     protected void Start() {
         playerAnimation = GetComponentInParent<PlayerAnimationHandler>();
-        // TEMPORARY
-        // attackCollider = attackHitboxes[Array.FindIndex(attackHitboxes,gameo => gameo.gameObject.name == "Forward Punch") ];
-        // attackObject.SetActive(false);
         attackCollider = this.gameObject.GetComponent<CircleCollider2D>();
-        // attackCollider.enabled = false;
-        timeTilImpact = timeTilImpact > 0 ? timeTilImpact : 0;
-        // attack range is the length of the attack collider's origin from zero
-        attackRange = new Vector3(attackCollider.bounds.center.x, attackCollider.bounds.center.y, 0) - Vector3.zero;
+        playerInput = GetComponentInParent<PlayerInput>();
+        timeTilImpact = timeTilImpact > 0 ? timeTilImpact : 0; // time should always be positive
+        attackRange = attackCollider.offset.magnitude;
         attackAOE = attackCollider.radius;
-        Debug.Log(attackRange);
+        Debug.Log("Attack range: " + attackRange);
     }
 
     virtual protected void Update() {
-        inputMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveDir = playerInput.GetMoveDirection();
         // use V key to attack
         ChangePosition();
         InitiateAttack();
     }
 
     void ChangePosition() {
-            if (inputMovement != Vector3.zero && canAttack) {
-                attackCollider.offset = inputMovement;
+            if (playerInput.IsMoving() && canAttack) {
+                attackCollider.offset = moveDir;
             } 
     }
 
@@ -57,13 +56,14 @@ public class PlayerAttack : MonoBehaviour
 
             // Purely for animation purposes
             playerAnimation.StartForwardPunchAttack();
-            
+
             StartCoroutine(AttackDuration());
         }
     }
 
     virtual protected IEnumerator AttackDuration() {
-        Vector3 startMove = inputMovement;
+        Vector3 startPos = transform.parent.position;
+
         if(timeTilImpact > 0)
         {
             yield return new WaitForSeconds(timeTilImpact);
@@ -72,18 +72,23 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = true;
         // This method handles the actual attack
         AttackEnemy();
-        yield return new WaitForSeconds(attackDuration);
-        // This is the end of the attack
+        yield return new WaitForSeconds(playerAnimation.GetAnimationClipLength());
         canAttack = true;
         isAttacking = false;
-        wasHit = false;
-        // if (startMove != inputMovement) {
-        //     prevPos = inputMovement;
-        //     // if we moved while attacking, we should update the collider offset
-        //     Vector3 newPos = inputMovement - startMove;
-        //     newPos = new Vector3(newPos.x / newPos.x, newPos.y / newPos.y, 0);
-        //     attackCollider.offset = newPos;
-        // }
+        enemyWasHit = false;
+        
+        Vector3 currentPosition = transform.parent.position;
+        if (startPos != currentPosition) {
+            // if we moved while attacking, we should update the collider offset
+            Vector3 newPos = currentPosition - startPos;
+            // constrain new position length to attack range
+            if (newPos.magnitude != attackRange) {
+                newPos = newPos.normalized * attackRange;
+            } 
+
+            
+            attackCollider.offset = newPos;
+        }
     }
 
     // virtual protected  void GetAttackHitboxes() {
@@ -95,6 +100,7 @@ public class PlayerAttack : MonoBehaviour
         if(enemyHealth != null) enemyHealth.TakeDamage(damage);
     }
 
+    // TODO : refactor this method with interface
     virtual protected void AttackEnemy(){
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCollider.bounds.center, attackCollider.radius);
         // find the enemy by components 
@@ -102,9 +108,9 @@ public class PlayerAttack : MonoBehaviour
             Component[] components = collider.gameObject.GetComponents(typeof(Component));
             Enemy enemy = null;
             foreach (Component component in components) {
-                if (component as Enemy && isAttacking && !wasHit){
+                if (component as Enemy && isAttacking && !enemyWasHit){
                     enemy = component as Enemy;
-                    wasHit = true;          
+                    enemyWasHit = true;          
                     DealDamage(attackDamage, enemy);
                     break;
                 }

@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class PlayerAnimationHandler : MonoBehaviour
 {
+    [SerializeField] private float postAttackDelay = 0f;
+    [SerializeField] bool isFlippable = true;
+    bool isFlipped = false;
     private Animator animator;
     private AnimatorClipInfo[] _animatorClipInfo;
     private float animLen;
+    Vector3 moveDirection;
+    SpriteRenderer spriteRenderer;
+    // TODO : make this a Vector3
+    float prevPos = 0f; 
 
-    [SerializeField] private float postForwardPunchDelay = 0f;
-    Vector3 currentDirection = Vector3.zero;
-    float startX = 0f; // set at the start of an animation to determine if the sprite should be return to starting position
-    bool isFlippable = true;
+    PlayerInput playerInput;
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        currentDirection = Vector3.right;
+        playerInput = GetComponent<PlayerInput>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
         animator.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
         animator.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) {
-            currentDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        if (playerInput.IsMoving()) {
+            moveDirection = playerInput.GetMoveDirection();
         }
     }
 
@@ -38,33 +42,35 @@ public class PlayerAnimationHandler : MonoBehaviour
         _animatorClipInfo = animator.GetCurrentAnimatorClipInfo(0);
     }
 
-    private float GetAnimationClipLength() {
+    public float GetAnimationClipLength() {
         _animatorClipInfo = animator.GetCurrentAnimatorClipInfo(0);
         return _animatorClipInfo[0].clip.length;
     }
 
     public IEnumerator ForwardPunchAttack() {
-        startX = currentDirection.x;
-
         // Start attack animation
         animator.SetTrigger("attackTrigger");
-        flipSprite(isFlippable);
+        flipSprite(isFlippable && moveDirection.x < 0);
         // Wait for animation to finish
         yield return StartCoroutine(GetAnimationClipInfo());
         
-        float attackLength = GetAnimationClipLength() + postForwardPunchDelay;
+        float attackLength = GetAnimationClipLength() + postAttackDelay;
         // Delay how long the attack is active
         yield return new WaitForSeconds(attackLength);
-        flipSprite(isFlippable && startX != currentDirection.x); 
+        flipSprite(); 
         animator.SetTrigger("attackTrigger");
     }
     
-    void flipSprite(bool shouldFlip) {
-        if (shouldFlip) {
-            transform.localScale = new Vector3(Mathf.Sign(currentDirection.x), 1f, 1f);
+    private void flipSprite(bool shouldFlip = false) {
+        if (shouldFlip && !isFlipped) {
+            isFlipped = true;
+            spriteRenderer.flipX = true;
         } 
-        else {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        else if (!shouldFlip && isFlipped) {
+            isFlipped = false;
+            spriteRenderer.flipX = false;
         }
+        
     }
+    
 }
