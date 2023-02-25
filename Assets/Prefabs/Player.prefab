@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4997596089dee541b070eb4b4ef0ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postForwardPunchDelay: 0.5
+  postAttackDelay: 0.25
   isFlippable: 1
 --- !u!114 &1139678139
 MonoBehaviour:
@@ -395,3 +395,4 @@ MonoBehaviour:
   attackDuration: 1.5
   attackDamage: 10
   timeTilImpact: 0.5
+  attackParticles: {fileID: 0}

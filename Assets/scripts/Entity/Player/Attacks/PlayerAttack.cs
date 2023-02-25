@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//  THIS CLASS IS A PARENT CLASS TODO: MAKE THIS A PARENT CLASS
+// TODO
+// THIS CLASS IS A PARENT CLASS TODO: MAKE THIS A PARENT CLASS
 // The player controller should actually handle the attack input
+// Clean up particles afte instantiating them
+
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -21,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 prevPos;
 
     // Componenet References
-    [SerializeField] ParticleSystem attackParticles;
+    [SerializeField] GameObject attackParticles;
     private CircleCollider2D attackCollider;
     private PlayerAnimationHandler playerAnimation;
     private PlayerInput playerInput;
@@ -77,6 +80,7 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = false;
         enemyWasHit = false;
         
+        
         Vector3 currentPosition = transform.parent.position;
         if (startPos != currentPosition) {
             // if we moved while attacking, we should update the collider offset
@@ -85,10 +89,11 @@ public class PlayerAttack : MonoBehaviour
             if (newPos.magnitude != attackRange) {
                 newPos = newPos.normalized * attackRange;
             } 
-
-            
             attackCollider.offset = newPos;
         }
+
+        // if particles are finished playing, stop them
+        // Destroy(attackParticles, 0.5f);
     }
 
     // virtual protected  void GetAttackHitboxes() {
@@ -109,8 +114,9 @@ public class PlayerAttack : MonoBehaviour
             Enemy enemy = null;
             foreach (Component component in components) {
                 if (component as Enemy && isAttacking && !enemyWasHit){
+                    attackParticles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
                     enemy = component as Enemy;
-                    enemyWasHit = true;          
+                    enemyWasHit = true;       
                     DealDamage(attackDamage, enemy);
                     break;
                 }
