@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Health))]
-public class Enemy: MonoBehaviour
+public class Enemy: MonoBehaviour, IDamageable
 {
     [SerializeField]
     protected GameObject currentTarget;
@@ -125,4 +125,12 @@ public class Enemy: MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    public void TakeDamage(float damage)
+    {
+    }
+
+    public float GetHealth()
+    {
+        return -1;
+    }
 }

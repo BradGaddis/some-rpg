@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Collider might not work the way that I intended it. I used a trigger, but apparently you need some sort of movement to trigger the trigger. I'll have to look into this more.
-
 //  THIS CLASS IS A PARENT CLASS TODO: MAKE THIS A PARENT CLASS
-
+// The player controller should actually handle the attack input
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -20,7 +18,10 @@ public class PlayerAttack : MonoBehaviour
     private bool isAttacking = false;
     private bool wasHit = false;
 
-    
+    Vector3 inputMovement;
+    Vector3 attackRange;  
+    float attackAOE;
+    Vector3 prevPos;
 
     protected void Start() {
         playerAnimation = GetComponentInParent<PlayerAnimationHandler>();
@@ -30,11 +31,23 @@ public class PlayerAttack : MonoBehaviour
         attackCollider = this.gameObject.GetComponent<CircleCollider2D>();
         // attackCollider.enabled = false;
         timeTilImpact = timeTilImpact > 0 ? timeTilImpact : 0;
+        // attack range is the length of the attack collider's origin from zero
+        attackRange = new Vector3(attackCollider.bounds.center.x, attackCollider.bounds.center.y, 0) - Vector3.zero;
+        attackAOE = attackCollider.radius;
+        Debug.Log(attackRange);
     }
 
     virtual protected void Update() {
+        inputMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         // use V key to attack
+        ChangePosition();
         InitiateAttack();
+    }
+
+    void ChangePosition() {
+            if (inputMovement != Vector3.zero && canAttack) {
+                attackCollider.offset = inputMovement;
+            } 
     }
 
     virtual public void InitiateAttack() {
@@ -44,11 +57,13 @@ public class PlayerAttack : MonoBehaviour
 
             // Purely for animation purposes
             playerAnimation.StartForwardPunchAttack();
+            
             StartCoroutine(AttackDuration());
         }
     }
 
     virtual protected IEnumerator AttackDuration() {
+        Vector3 startMove = inputMovement;
         if(timeTilImpact > 0)
         {
             yield return new WaitForSeconds(timeTilImpact);
@@ -62,6 +77,13 @@ public class PlayerAttack : MonoBehaviour
         canAttack = true;
         isAttacking = false;
         wasHit = false;
+        // if (startMove != inputMovement) {
+        //     prevPos = inputMovement;
+        //     // if we moved while attacking, we should update the collider offset
+        //     Vector3 newPos = inputMovement - startMove;
+        //     newPos = new Vector3(newPos.x / newPos.x, newPos.y / newPos.y, 0);
+        //     attackCollider.offset = newPos;
+        // }
     }
 
     // virtual protected  void GetAttackHitboxes() {

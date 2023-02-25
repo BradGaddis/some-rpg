@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     float runSpeed;
     // stats stribable object
     [SerializeField] Stats stats;
+    [Header("This is a test to see if I like the movement locked or not. Just for toggle")] [SerializeField] bool lockedMovement;
     int speed;
     [SerializeField] float jumpForce;
     [SerializeField] [Header("The Player Size Mid-Jump")] float jumpSize; // TODO: make this actually work
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
             currentState.ChangeState(PlayerState.Idle);
         }
         // lock diagonal movement
-        if (moveHorizontal != 0 && moveVertical != 0)
+        if (moveHorizontal != 0 && moveVertical != 0 && lockedMovement)
         {
             moveHorizontal = 0;
         }
