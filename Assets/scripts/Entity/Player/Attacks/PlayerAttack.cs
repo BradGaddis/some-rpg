@@ -5,8 +5,6 @@ using UnityEngine;
 
 // TODO
 // THIS CLASS IS A PARENT CLASS TODO: MAKE THIS A PARENT CLASS
-// The player controller should actually handle the attack input
-// Clean up particles afte instantiating them
 
 
 public class PlayerAttack : MonoBehaviour
@@ -24,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 prevPos;
 
     // Componenet References
-    [SerializeField] GameObject attackParticles;
+    [SerializeField] ParticleSystem attackParticles;
     private CircleCollider2D attackCollider;
     private PlayerAnimationHandler playerAnimation;
     private PlayerInput playerInput;
@@ -92,8 +90,6 @@ public class PlayerAttack : MonoBehaviour
             attackCollider.offset = newPos;
         }
 
-        // if particles are finished playing, stop them
-        // Destroy(attackParticles, 0.5f);
     }
     
     virtual protected void AttackEnemy() {
@@ -101,7 +97,8 @@ public class PlayerAttack : MonoBehaviour
         // find the enemy by components 
         foreach (Collider2D collider in colliders) {
             if (collider.TryGetComponent<IDamageable>(out IDamageable damageable) && isAttacking && !enemyWasHit){
-                attackParticles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
+                ParticleSystem particles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
+                Destroy(particles.gameObject, 3f);                
                 enemyWasHit = true;       
                 damageable.TakeDamage(attackDamage);
                 break;
