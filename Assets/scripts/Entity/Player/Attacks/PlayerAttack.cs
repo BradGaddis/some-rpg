@@ -6,16 +6,17 @@ using UnityEngine;
 // TODO
 // THIS CLASS IS A PARENT CLASS TODO: MAKE THIS A PARENT CLASS
 
-
+// This class defaults to a forward punch attack for testing purposes, but can be used for other attacks as well
 public class PlayerAttack : MonoBehaviour
 {
     // Collider2D[] attackHitboxes;
-    [SerializeField] float attackDuration = 2f;
-    [SerializeField] float attackDamage = 10f;
-    [SerializeField] float timeTilImpact = 0.5f;
-    private bool canAttack = true;
-    private bool isAttacking = false;
-    private bool enemyWasHit = false;
+    [SerializeField] protected float attackDuration = 2f;
+    [SerializeField] protected float attackDamage = 10f;
+    [SerializeField] protected float timeTilImpact = 0.5f;
+    [SerializeField] protected float particleTimeOut = 0.5f;
+    protected bool canAttack = true;
+    protected bool isAttacking = false;
+    protected bool enemyWasHit = false;
     private Vector3 moveDir;
     private float attackRange;  
     private float attackAOE;
@@ -40,17 +41,23 @@ public class PlayerAttack : MonoBehaviour
     virtual protected void Update() {
         moveDir = playerInput.GetMoveDirection();
         // use V key to attack
-        ChangePosition();
+        ChangePosition(); 
         InitiateAttack();
     }
 
-    void ChangePosition() {
+    /// <summary>
+    /// This method is used to change the position of the attack collider
+    /// </summary>
+    virtual protected void ChangePosition() {
             if (playerInput.IsMoving() && canAttack) {
                 attackCollider.offset = moveDir;
             } 
     }
 
-    virtual public void InitiateAttack() {
+    /// <summary>
+    /// This method is used to initiate the attack process
+    /// </summary>
+    virtual protected void InitiateAttack() {
         if (Input.GetKeyDown(KeyCode.V) && canAttack) {
             canAttack = false;
             // isAttacking = true;
@@ -62,6 +69,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method is used to handle logic of the duration of the attack
+    /// </summary>
     virtual protected IEnumerator AttackDuration() {
         Vector3 startPos = transform.parent.position;
 
@@ -92,13 +102,16 @@ public class PlayerAttack : MonoBehaviour
 
     }
     
+    /// <summary>
+    /// This method is used to handle the actual attack. Such as dealing damage to the enemy dealing knockback to the enemy
+    /// </summary>
     virtual protected void AttackEnemy() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCollider.bounds.center, attackCollider.radius);
         // find the enemy by components 
         foreach (Collider2D collider in colliders) {
             if (collider.TryGetComponent<IDamageable>(out IDamageable damageable) && isAttacking && !enemyWasHit){
                 ParticleSystem particles = Instantiate(attackParticles, attackCollider.bounds.center, Quaternion.identity);
-                Destroy(particles.gameObject, 3f);                
+                Destroy(particles.gameObject, particleTimeOut);                
                 enemyWasHit = true;       
                 damageable.TakeDamage(attackDamage);
                 break;

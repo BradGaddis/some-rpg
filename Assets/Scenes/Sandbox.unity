@@ -323,7 +323,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1886278833, guid: 9abead19c7b393c438bc83d85e5f1838, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9abead19c7b393c438bc83d85e5f1838, type: 3}
 --- !u!1 &1139678130 stripped
 GameObject:
@@ -507,6 +508,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2033283913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6512395510119857874, guid: 9abead19c7b393c438bc83d85e5f1838, type: 3}
+  m_PrefabInstance: {fileID: 409286387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2033283917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033283913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbd383e3a0c0f140ac315d1364c9147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDuration: 1.5
+  attackDamage: 10
+  timeTilImpact: 0.5
+  attackParticles: {fileID: 4425922431551753507, guid: 585a1a1bc06f0d44bbbdf397994b0bb6, type: 3}
 --- !u!1 &2067581271
 GameObject:
   m_ObjectHideFlags: 0
