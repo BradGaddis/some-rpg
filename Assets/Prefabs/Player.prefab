@@ -341,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3633752795492543744}
   - component: {fileID: 1116125539112674162}
-  - component: {fileID: 1886278833}
+  - component: {fileID: 2033283917}
   m_Layer: 0
   m_Name: Forward Punch
   m_TagString: Untagged
@@ -380,7 +380,7 @@ CircleCollider2D:
   m_Offset: {x: 1, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1886278833
+--- !u!114 &2033283917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,10 +389,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6512395510119857874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7268b0157d07e41ad80101ae05ef00, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cbd383e3a0c0f140ac315d1364c9147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackDuration: 1.5
   attackDamage: 10
   timeTilImpact: 0.5
-  attackParticles: {fileID: 0}
+  particleTimeOut: 0.5
+  attackParticles: {fileID: 4425922431551753507, guid: 585a1a1bc06f0d44bbbdf397994b0bb6, type: 3}
